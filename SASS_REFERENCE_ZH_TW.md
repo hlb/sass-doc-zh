@@ -15,27 +15,20 @@ Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你�
 * 符合語法、客制化的產出
 * [Firebug 整合](https://addons.mozilla.org/en-US/firefox/addon/103988)
 
-## Syntax
+## 語法
 
-There are two syntaxes available for Sass.
-The first, known as SCSS (Sassy CSS) and used throughout this reference,
-is an extension of the syntax of CSS3.
-This means that every valid CSS3 stylesheet
-is a valid SCSS file with the same meaning.
-In addition, SCSS understands most CSS hacks
-and vendor-specific syntax, such as [IE's old `filter` syntax](http://msdn.microsoft.com/en-us/library/ms533754%28VS.85%29.aspx).
-This syntax is enhanced with the Sass features described below.
-Files using this syntax have the `.scss` extension.
+Sass 有兩種語法。
+第一種稱為 SCSS (Sassy CSS)，是一個 CSS3 語法的擴充版本，這整份參考資料都使用本語法。
+這代表著所有符合 CSS3 語法的樣式表也都是符合語法並且意義相同的 SCSS 檔案。
+此外，SCSS 瞭解大多數 CSS hacks 以及瀏覽器專屬語法，像是 [IE 的舊版 `filter` 語法](http://msdn.microsoft.com/en-us/library/ms533754%28VS.85%29.aspx)。
+這種語法提供的 Sass 強化特色如下面所述。
+使用本語法的檔案，副檔名是 `.scss` 結尾。
 
-The second and older syntax, known as the indented syntax (or sometimes just "Sass"),
-provides a more concise way of writing CSS.
-It uses indentation rather than brackets to indicate nesting of selectors,
-and newlines rather than semicolons to separate properties.
-Some people find this to be easier to read and quicker to write than SCSS.
-The indented syntax has all the same features,
-although some of them have slightly different syntax;
-this is described in {file:INDENTED_SYNTAX.md the indented syntax reference}.
-Files using this syntax have the `.sass` extension.
+第二種比較舊的語法稱為縮排語法（indented syntax，或是就叫做 "Sass"），提供一種更簡潔的 CSS 撰寫方式。
+它不使用括號，透過縮排來表示選擇符(selectors)的巢狀階層，也捨棄分號，用換行來隔開屬性(properties)。
+有些人發現，這樣比 SCSS 更易讀好寫。
+縮排語法有著所有相同的特色，雖然有些語法上稍有差異。這些差異在{file:INDENTED_SYNTAX.md 縮排語法參考資料}都有描述。
+使用本語法的檔案，副檔名是 `.sass` 結尾。
 
 Either syntax can [import](#import) files written in the other.
 Files can be automatically converted from one syntax to the other
