@@ -1,17 +1,10 @@
-# Sass (Syntactically Awesome StyleSheets)
+# Sass （語法超讚樣式表）
 
-* Table of contents
+* 目錄
 {:toc}
 
-Sass is an extension of CSS
-that adds power and elegance to the basic language.
-It allows you to use [variables](#variables_), [nested rules](#nested_rules),
-[mixins](#mixins), [inline imports](#import), and more,
-all with a fully CSS-compatible syntax.
-Sass helps keep large stylesheets well-organized,
-and get small stylesheets up and running quickly,
-particularly with the help of
-[the Compass style library](http://compass-style.org).
+Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你使用 [變數](#variables_), [巢狀規則](#nested_rules)、
+[混搭(mixins)](#mixins)、[行內 imports](#import) 以及其它功能，並且全部與 CSS 語法相容。Sass 有助於保持大型樣式表的結構嚴謹，同時也讓人能快速上手小型樣式表，特別是搭配 [Compass 樣式庫](http://compass-style.org)時。
 
 ## Features
 
