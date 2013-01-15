@@ -4,7 +4,7 @@
 {:toc}
 
 Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你使用 [變數](#variables_), [巢狀規則](#nested_rules)、
-[混搭(mixins)](#mixins)、[行內 imports](#import) 等眾多功能，並且完全相容 CSS 既有語法。Sass 有助於保持大型樣式表的結構嚴謹，同時也讓人能夠快速上手小型樣式表，特別是在搭配 [Compass 函式庫](http://compass-style.org)使用的時候。
+[混搭(mixins)](#mixins)、[直接匯入(inline import)](#import) 等眾多功能，並且完全相容 CSS 既有語法。Sass 有助於保持大型樣式表的結構嚴謹，同時也讓人能夠快速上手小型樣式表，特別是在搭配 [Compass 函式庫](http://compass-style.org)使用的時候。
 
 ## 特色
 
@@ -30,14 +30,13 @@ Sass 有兩種語法。
 縮排語法有著所有相同的特色，雖然有些語法上稍有差異。這些差異在{file:INDENTED_SYNTAX.md 縮排語法參考資料}都有描述。
 使用本語法的檔案，副檔名是 `.sass` 結尾。
 
-Either syntax can [import](#import) files written in the other.
-Files can be automatically converted from one syntax to the other
-using the `sass-convert` command line tool:
+任一種語法都可以[匯入](#import)用另一種語法撰寫的檔案。
+只要使用 `sass-convert` 命令列工具，就可以將檔案自動轉換成另一種語法：
 
-    # Convert Sass to SCSS
+    # 把 Sass 轉換成 SCSS
     $ sass-convert style.sass style.scss
 
-    # Convert SCSS to Sass
+    # 把 SCSS 轉換成 Sass
     $ sass-convert style.scss style.sass
 
 ## Using Sass
