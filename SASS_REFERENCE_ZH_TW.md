@@ -4,16 +4,16 @@
 {:toc}
 
 Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你使用 [變數](#variables_), [巢狀規則](#nested_rules)、
-[混搭(mixins)](#mixins)、[行內 imports](#import) 以及其它功能，並且全部與 CSS 語法相容。Sass 有助於保持大型樣式表的結構嚴謹，同時也讓人能快速上手小型樣式表，特別是搭配 [Compass 樣式庫](http://compass-style.org)時。
+[混搭(mixins)](#mixins)、[行內 imports](#import) 等眾多功能，並且完全相容 CSS 既有語法。Sass 有助於保持大型樣式表的結構嚴謹，同時也讓人能夠快速上手小型樣式表，特別是在搭配 [Compass 函式庫](http://compass-style.org)使用的時候。
 
-## Features
+## 特色
 
-* Fully CSS3-compatible
-* Language extensions such as variables, nesting, and mixins
-* Many {Sass::Script::Functions useful functions} for manipulating colors and other values
-* Advanced features like [control directives](#control_directives) for libraries
-* Well-formatted, customizable output
-* [Firebug integration](https://addons.mozilla.org/en-US/firefox/addon/103988)
+* 完全相容 CSS3
+* 變數、巢狀、混搭(mixins)等語法擴充
+* 許多操控色彩與其他數值的{Sass::Script::Functions 好用函式}
+* 進階功能，像是提供函式庫使用的[控制指令](#control_directives)
+* 符合語法、客制化的產出
+* [Firebug 整合](https://addons.mozilla.org/en-US/firefox/addon/103988)
 
 ## Syntax
 
