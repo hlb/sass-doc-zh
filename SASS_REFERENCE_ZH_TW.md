@@ -19,19 +19,19 @@ Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你�
 
 Sass 有兩種語法。
 第一種稱為 SCSS (Sassy CSS)，是一個 CSS3 語法的擴充版本，這整份參考資料都使用本語法。
-這代表著所有符合 CSS3 語法的樣式表也都是符合語法並且意義相同的 SCSS 檔案。
+這代表著所有符合 CSS3 語法的樣式表也都是符合語法並且意義相同的 SCSS 文件。
 此外，SCSS 瞭解大多數 CSS hacks 以及瀏覽器專屬語法，像是 [IE 的舊版 `filter` 語法](http://msdn.microsoft.com/en-us/library/ms533754%28VS.85%29.aspx)。
 這種語法提供的 Sass 強化特色如下面所述。
-使用本語法的檔案，副檔名是 `.scss` 結尾。
+使用本語法的文件，副檔名是 `.scss` 結尾。
 
 第二種比較舊的語法稱為縮排語法（indented syntax，或是就稱作 "Sass"），提供一種更簡潔的 CSS 撰寫方式。
 它不使用括號，透過縮排來表示選擇符(selectors)的巢狀階層，也捨棄分號，用換行來隔開屬性(properties)。
 有些人發現，這樣比 SCSS 更易讀好寫。
 縮排語法有著所有相同的特色，雖然有些語法上稍有差異。這些差異在{file:INDENTED_SYNTAX.md 縮排語法參考資料}都有描述。
-使用本語法的檔案，副檔名是 `.sass` 結尾。
+使用本語法的文件，副檔名是 `.sass` 結尾。
 
-任一種語法都可以[匯入](#import)用另一種語法撰寫的檔案。
-只要使用 `sass-convert` 命令列工具，就可以將檔案自動轉換成另一種語法：
+任一種語法都可以[匯入](#import)用另一種語法撰寫的文件。
+只要使用 `sass-convert` 命令列工具，就可以將文件自動轉換成另一種語法：
 
     # 把 Sass 轉換成 SCSS
     $ sass-convert style.sass style.scss
@@ -53,11 +53,11 @@ Sass 有三種使用方式：
 
     sass input.scss output.css
 
-你也可以命令 Sass 監看檔案，並且在每次 Sass 檔案修改後更新 CSS：
+你也可以命令 Sass 監看文件，並且在每次 Sass 文件修改後更新 CSS：
 
     sass --watch input.scss:output.css
 
-如果你的目錄裡有許多 Sass 檔案，你也可以命令 Sass 監看整個目錄：
+如果你的目錄裡有許多 Sass 文件，你也可以命令 Sass 監看整個目錄：
 
     sass --watch app/sass:public/stylesheets
 
@@ -89,24 +89,22 @@ Sass 有三種使用方式：
     use Sass::Plugin::Rack
 
 Sass 樣式表跟視圖(views)的運作方式不同。
-它並沒有動態的內容，所以 CSS 只需要在 Sass 檔案更新時產生。
+它並沒有動態的內容，所以 CSS 只需要在 Sass 文件更新時產生。
 
-默認情況下，`.sass` 跟 `.scss` 檔案是放在 public/stylesheets/sass 目錄（這可以用 [`:template_location`](#template_location-option) 選項客制化）。然後在必要時，他們會被編譯成相應的 CSS 檔案放到 public/stylesheets。例如，public/stylesheets/sass/main.scss 會被編譯成 public/stylesheets/main.css。
+默認情況下，`.sass` 跟 `.scss` 文件是放在 public/stylesheets/sass 目錄（這可以用 [`:template_location`](#template_location-option) 選項客制化）。然後在必要時，他們會被編譯成相應的 CSS 文件放到 public/stylesheets。例如，public/stylesheets/sass/main.scss 會被編譯成 public/stylesheets/main.css。
 
-### Caching
+### 快取(Caching)
 
-By default, Sass caches compiled templates and [partials](#partials).
-This dramatically speeds up re-compilation of large collections of Sass files,
-and works best if the Sass templates are split up into separate files
-that are all [`@import`](#import)ed into one large file.
+默認情況下，Sass 會快取編譯過的樣板與 [partials](#partials)。
+這會明顯加快大批 Sass 文件的重新編譯速度，並且在 Sass 樣板被切割成分散文件，再透過 [`@import`](#import) 匯入成一個大文件的時候效果最好。
 
-Without a framework, Sass puts the cached templates in the `.sass-cache` directory.
-In Rails and Merb, they go in `tmp/sass-cache`.
-The directory can be customized with the [`:cache_location`](#cache_location-option) option.
-If you don't want Sass to use caching at all,
-set the [`:cache`](#cache-option) option to `false`.
+在沒有使用框架的情況，Sass 會把快取樣板放在 `.sass-cache` 目錄。
+在 Rails 與 Merb，它們會放在 `tmp/sass-cache`。
+這個目錄可以用 [`:cache_location`](#cache_location-option) 選項客制化。
 
-### Options
+如果你完全不希望 Sass 使用快取，就把 [`:cache`](#cache-option) 選項設為 `false`.
+
+### 選項
 
 Options can be set by setting the {Sass::Plugin::Configuration#options Sass::Plugin#options} hash
 in `environment.rb` in Rails or `config.ru` in Rack...
