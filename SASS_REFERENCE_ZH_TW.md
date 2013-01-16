@@ -293,14 +293,10 @@ Available options are:
 {#quiet-option} `:quiet`
 : When set to true, causes warnings to be disabled.
 
-### Syntax Selection
+### 語法選擇
 
-The Sass command-line tool will use the file extension to determine which
-syntax you are using, but there's not always a filename. The `sass`
-command-line program defaults to the indented syntax but you can pass the
-`--scss` option to it if the input should be interpreted as SCSS syntax.
-Alternatively, you can use the `scss` command-line program which is exactly
-like the `sass` program but it defaults to assuming the syntax is SCSS.
+Sass 命令列工具會根據文件副檔名判斷你使用的語法，但是有時候未必有檔名這回事。`sass` 命令列程式預設採用縮排語法，但是如果你需要輸入的資料用 SCSS 語法解析，可以傳入 `--scss` 選項。
+另外，你可以使用 `scss` 命令列程式，它跟 `sass` 程式完全一模一樣，不過預設採用的語法是 SCSS。
 
 ### Encodings
 
