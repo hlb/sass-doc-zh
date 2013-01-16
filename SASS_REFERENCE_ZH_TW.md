@@ -24,7 +24,7 @@ Sass 有兩種語法。
 這種語法提供的 Sass 強化特色如下面所述。
 使用本語法的檔案，副檔名是 `.scss` 結尾。
 
-第二種比較舊的語法稱為縮排語法（indented syntax，或是就叫做 "Sass"），提供一種更簡潔的 CSS 撰寫方式。
+第二種比較舊的語法稱為縮排語法（indented syntax，或是就稱作 "Sass"），提供一種更簡潔的 CSS 撰寫方式。
 它不使用括號，透過縮排來表示選擇符(selectors)的巢狀階層，也捨棄分號，用換行來隔開屬性(properties)。
 有些人發現，這樣比 SCSS 更易讀好寫。
 縮排語法有著所有相同的特色，雖然有些語法上稍有差異。這些差異在{file:INDENTED_SYNTAX.md 縮排語法參考資料}都有描述。
@@ -53,57 +53,45 @@ Sass 有三種使用方式：
 
     sass input.scss output.css
 
-You can also tell Sass to watch the file and update the CSS
-every time the Sass file changes:
+你也可以命令 Sass 監看檔案，並且在每次 Sass 檔案修改後更新 CSS：
 
     sass --watch input.scss:output.css
 
-If you have a directory with many Sass files,
-you can also tell Sass to watch the entire directory:
+如果你的目錄裡有許多 Sass 檔案，你也可以命令 Sass 監看整個目錄：
 
     sass --watch app/sass:public/stylesheets
 
-Use `sass --help` for full documentation.
+使用 `sass --help` 列出完整文件。
 
-Using Sass in Ruby code is very simple.
-After installing the Sass gem,
-you can use it by running `require "sass"`
-and using {Sass::Engine} like so:
+在 Ruby 程式碼中使用 Sass 非常容易。
+安裝完 Sass gem 之後，你可以執行 `require "sass"`，然後像這樣使用 {Sass::Engine}：
 
     engine = Sass::Engine.new("#main {background-color: #0000ff}", :syntax => :scss)
     engine.render #=> "#main { background-color: #0000ff; }\n"
 
-### Rack/Rails/Merb Plugin
+### Rack/Rails/Merb 外掛套件
 
-To enable Sass in Rails versions before Rails 3,
-add the following line to `environment.rb`:
+要在 Rails 3 之前的版本啟用 Sass，請把這一行加到 `environment.rb`：
 
     config.gem "sass"
 
-For Rails 3, instead add the following line to the Gemfile:
+對於 Rails 3，則是把這一行加到 Gemfile：
 
     gem "sass"
 
-To enable Sass in Merb,
-add the following line to `config/dependencies.rb`:
+要在 Merb 裡啟用 Sass，請把這一行加到 `config/dependencies.rb`：
 
     dependency "merb-haml"
 
-To enable Sass in a Rack application,
-add
+要在一個 Rack 應用程式裡啓用 Sass，在 `config.ru` 加上
 
     require 'sass/plugin/rack'
     use Sass::Plugin::Rack
 
-to `config.ru`.
+Sass 樣式表跟視圖(views)的運作方式不同。
+它並沒有動態的內容，所以 CSS 只需要在 Sass 檔案更新時產生。
 
-Sass stylesheets don't work the same as views.
-They don't contain dynamic content,
-so the CSS only needs to be generated when the Sass file has been updated.
-By default, `.sass` and `.scss` files are placed in public/stylesheets/sass
-(this can be customized with the [`:template_location`](#template_location-option) option).
-Then, whenever necessary, they're compiled into corresponding CSS files in public/stylesheets.
-For instance, public/stylesheets/sass/main.scss would be compiled to public/stylesheets/main.css.
+默認情況下，`.sass` 跟 `.scss` 檔案是放在 public/stylesheets/sass 目錄（這可以用 [`:template_location`](#template_location-option) 選項客制化）。然後在必要時，他們會被編譯成相應的 CSS 檔案放到 public/stylesheets。例如，public/stylesheets/sass/main.scss 會被編譯成 public/stylesheets/main.css。
 
 ### Caching
 
