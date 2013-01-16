@@ -1,4 +1,4 @@
-# Sass （語法超讚樣式表）
+# Sass （Syntactically Awesome StyleSheets 語法超讚樣式表）
 
 * 目錄
 {:toc}
@@ -39,21 +39,17 @@ Sass 有兩種語法。
     # 把 SCSS 轉換成 Sass
     $ sass-convert style.scss style.sass
 
-## Using Sass
+## 使用 Sass
 
-Sass can be used in three ways:
-as a command-line tool,
-as a standalone Ruby module,
-and as a plugin for any Rack-enabled framework,
-including Ruby on Rails and Merb.
-The first step for all of these is to install the Sass gem:
+Sass 有三種使用方式：
+作為命令列工具、獨立的 Ruby 模組，以及 Ruby on Rails 與 Merb 這些支援 Rack 的程式框架(framework)的外掛套件。
+所有這些方式的第一步都是安裝 Sass gem：
 
     gem install sass
 
-If you're using Windows,
-you may need to [install Ruby](http://rubyinstaller.org/download.html) first.
+如果你使用 Windoes，你大概需要先 [安裝 Ruby](http://rubyinstaller.org/download.html)。
 
-To run Sass from the command line, just use
+要在命令列執行 Sass，只要輸入
 
     sass input.scss output.css
 
