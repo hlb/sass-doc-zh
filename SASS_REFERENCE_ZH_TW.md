@@ -637,26 +637,23 @@ SassScript 兩種都認得，並且如果一種類型的字串被用在 Sass 文
 第一個是包含兩個列表的列表，
 第二個是包含四個數字的列表。
 
-Lists can also have no items in them at all.
-These lists are represented as `()`.
-They can't be output directly to CSS;
-if you try to do e.g. `font-family: ()`, Sass will raise an error.
-If a list contains empty lists or null values,
-as in `1px 2px () 3px` or `1px 2px null 3px`,
-the empty lists and null values will be removed
-before the containing list is turned into CSS.
+列表也可以完全不含任何項目。
+這種列表是用 `()` 表示。
+他們不會直接輸出成 CSS；
+如果你試著執行 `font-family: ()`，Sass 會觸發一個錯誤。
+如果一個列表含有空列表或空值，
+如同 `1px 2px () 3px` 或 `1px 2px null 3px`，
+空列表與空值會在該列表被轉換成 CSS 之前被移除掉。
 
-### Operations
+### 運算
 
-All types support equality operations (`==` and `!=`).
-In addition, each type has its own operations
-that it has special support for.
+所有類別都支援等式運算（`==` 和 `!=`）。
+此外，每種類別有自己特別支援的運算功能。
 
-#### Number Operations
+#### 數字運算
 
-SassScript supports the standard arithmetic operations on numbers
-(`+`, `-`, `*`, `/`, `%`),
-and will automatically convert between units if it can:
+SassScript 支援數字的標準算術運算（`+`、`-`、`*`、`/`、`%`），
+而且會盡可能地自動在單位間換算：
 
     p {
       width: 1in + 8pt;
