@@ -569,21 +569,21 @@ SassScript 最簡單的使用方式就是操作變數。
 
 變數也曾經使用 `=` 而非 `:` 定義。這種用法也仍然有效，但是已經被廢棄，並且會印出警告訊息。`:` 是推薦的語法。
 
-### Data Types
+### 資料型別
 
-SassScript supports six main data types:
+SassScript 支援六種主要的資料型別：
 
-* numbers (e.g. `1.2`, `13`, `10px`)
-* strings of text, with and without quotes (e.g. `"foo"`, `'bar'`, `baz`)
-* colors (e.g. `blue`, `#04a3f9`, `rgba(255, 0, 0, 0.5)`)
-* booleans (e.g. `true`, `false`)
-* nulls (e.g. `null`)
-* lists of values, separated by spaces or commas (e.g. `1.5em 1em 0 2em`, `Helvetica, Arial, sans-serif`)
+* 數字（例如 `1.2`、`13`、`10px`）
+* 文字字串，無論有沒有括號（例如 `"foo"`、`'bar'`、`baz`）
+* 顏色（例如 `blue`、`#04a3f9`、`rgba(255, 0, 0, 0.5)`）
+* 布林值（例如 `true`、`false`）
+* 空值（例如 `null`）
+* 值列表，用空白或逗號隔開（例如 `1.5em 1em 0 2em`、`Helvetica, Arial, sans-serif`）
 
-SassScript also supports all other types of CSS property value,
-such as Unicode ranges and `!important` declarations.
-However, it has no special handling for these types.
-They're treated just like unquoted strings.
+SassScript 也支援所有其他 CSS 屬性值，
+例如 Unicode 範圍和 `!important` 宣告。
+然而，它不會對這類型別做任何操作。
+它們只會被當成一般字串看待。
 
 #### Strings {#sass-script-strings}
 
