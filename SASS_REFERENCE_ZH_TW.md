@@ -300,7 +300,8 @@ Sass 命令列工具會根據文件副檔名判斷你使用的語法，但是有
 
 ### 編碼
 
-當使用 Ruby 1.9 以上版本運作時，Sass 會瞭解文件使用的字元編碼。
+When running on Ruby 1.9 and later, Sass is aware of the character encoding of documents
+and will handle them the same way that CSS would.
 By default, Sass assumes that all stylesheets are encoded
 using whatever coding system your operating system defaults to.
 For many users this will be `UTF-8`, the de facto standard for the web.
@@ -548,33 +549,25 @@ SasScript 也可用於產生選擇符與屬性名稱，
     >> #777 + #888
     white
 
-### Variables: `$` {#variables_}
+### 變數：`$` {#variables_}
 
-The most straightforward way to use SassScript
-is to use variables.
-Variables begin with dollar signs,
-and are set like CSS properties:
+SassScript 最簡單的使用方式就是操作變數。
+變數是用美元符號開頭，並且設定方式就像 CSS 屬性：
 
     $width: 5em;
 
-You can then refer to them in properties:
+然後你就可以在設定屬性時提到它：
 
     #main {
       width: $width;
     }
 
-Variables are only available within the level of nested selectors
-where they're defined.
-If they're defined outside of any nested selectors,
-they're available everywhere.
+變數只會在定義它們的巢狀選擇符內有效。
+如果它們是在巢狀選擇符外被定義，那麼他們在任何地方都有效。
 
-Variables used to use the prefix character `!`;
-this still works, but it's deprecated and prints a warning.
-`$` is the recommended syntax.
+變數曾經使用 `!` 前置字元。這種用法仍然有效，但是已經被廢棄(deprecated)了，並且會印出警告訊息。`$` 是推薦的語法。
 
-Variables also used to be defined with `=` rather than `:`;
-this still works, but it's deprecated and prints a warning.
-`:` is the recommended syntax.
+變數也曾經使用 `=` 而非 `:` 定義。這種用法也仍然有效，但是已經被廢棄，並且會印出警告訊息。`:` 是推薦的語法。
 
 ### Data Types
 
