@@ -12,7 +12,7 @@ Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你�
 * 變數、巢狀、混搭(mixins)等語法擴充
 * 許多操控色彩與其他數值的{Sass::Script::Functions 好用函式}
 * 進階功能，像是提供函式庫使用的[控制指令](#control_directives)
-* 符合語法、客制化的產出
+* 符合語法、客制化的輸出
 * [Firebug 整合](https://addons.mozilla.org/en-US/firefox/addon/103988)
 
 ## 語法
@@ -136,11 +136,11 @@ Available options are:
   If the correct syntax isn't used, an error is thrown.
   `:new` forces the use of a colon or equals sign
   after the property name.
-  For example: `color: #0f3`
+  例如： `color: #0f3`
   or `width: $main_width`.
   `:old` forces the use of a colon
   before the property name.
-  For example: `:color #0f3`
+  例如： `:color #0f3`
   or `:width $main_width`.
   By default, either syntax is valid.
   This has no effect on SCSS documents.
@@ -298,10 +298,9 @@ Available options are:
 Sass 命令列工具會根據文件副檔名判斷你使用的語法，但是有時候未必有檔名這回事。`sass` 命令列程式預設採用縮排語法，但是如果你需要輸入的資料用 SCSS 語法解析，可以傳入 `--scss` 選項。
 另外，你可以使用 `scss` 命令列程式，它跟 `sass` 程式完全一模一樣，不過預設採用的語法是 SCSS。
 
-### Encodings
+### 編碼
 
-When running on Ruby 1.9 and later, Sass is aware of the character encoding of documents
-and will handle them the same way that CSS would.
+當使用 Ruby 1.9 以上版本運作時，Sass 會瞭解文件使用的字元編碼。
 By default, Sass assumes that all stylesheets are encoded
 using whatever coding system your operating system defaults to.
 For many users this will be `UTF-8`, the de facto standard for the web.
@@ -341,13 +340,13 @@ and so Sass behaves somewhat differently when running under it than under Ruby 1
 In Ruby 1.8, Sass simply uses the first `@charset` declaration in the stylesheet
 or any of the other stylesheets it `@import`s.
 
-## CSS Extensions
+## CSS 擴充版本
 
-### Nested Rules
+### 巢狀規則 Nested Rules
 
-Sass allows CSS rules to be nested within one another.
-The inner rule then only applies within the outer rule's selector.
-For example:
+Sass 允許 CSS 規則被嵌套在其他規則裡。
+內層規則只適用在外層規則的選擇符上。
+例如：
 
     #main p {
       color: #00ff00;
@@ -359,7 +358,7 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     #main p {
       color: #00ff00;
@@ -368,9 +367,9 @@ is compiled to:
         background-color: #ff0000;
         color: #000000; }
 
-This helps avoid repetition of parent selectors,
-and makes complex CSS layouts with lots of nested selectors much simpler.
-For example:
+這有助於避免重複的父選擇符，
+並且讓有許多巢狀選擇符的複雜 CSS 佈局變得更簡單。
+例如：
 
     #main {
       width: 97%;
@@ -383,7 +382,7 @@ For example:
       pre { font-size: 3em; }
     }
 
-is compiled to:
+被編譯成：
 
     #main {
       width: 97%; }
@@ -394,16 +393,12 @@ is compiled to:
       #main pre {
         font-size: 3em; }
 
-### Referencing Parent Selectors: `&`
+### 參考父選擇符：`&`
 
-Sometimes it's useful to use a nested rule's parent selector
-in other ways than the default.
-For instance, you might want to have special styles
-for when that selector is hovered over
-or for when the body element has a certain class.
-In these cases, you can explicitly specify where the parent selector
-should be inserted using the `&` character.
-For example:
+有時候提供其他途徑來使用巢狀語法的父選擇符是非常有幫助的。
+例如，你可能會希望在選擇符被滑鼠停留、或是當 body 元件有特定類別的時候，給予選擇符特定的樣式
+在這種情況下，你可以用 `&` 字元來明確指出父選擇符應該放在哪裡。
+例如：
 
     a {
       font-weight: bold;
@@ -412,7 +407,7 @@ For example:
       body.firefox & { font-weight: normal; }
     }
 
-is compiled to:
+被編譯成：
 
     a {
       font-weight: bold;
@@ -422,11 +417,9 @@ is compiled to:
       body.firefox a {
         font-weight: normal; }
 
-`&` will be replaced with the parent selector as it appears in the CSS.
-This means that if you have a deeply nested rule,
-the parent selector will be fully resolved
-before the `&` is replaced.
-For example:
+`&` 在編譯成 CSS 時，會被父選擇符置換掉。
+這代表說，要是你有一個深層的巢狀規則，父選擇符也會被完整解析，再置換掉 `&`。
+例如：
 
     #main {
       color: black;
@@ -436,7 +429,7 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     #main {
       color: black; }
@@ -445,17 +438,12 @@ is compiled to:
         #main a:hover {
           color: red; }
 
-### Nested Properties
+### 巢狀屬性
 
-CSS has quite a few properties that are in "namespaces;"
-for instance, `font-family`, `font-size`, and `font-weight`
-are all in the `font` namespace.
-In CSS, if you want to set a bunch of properties in the same namespace,
-you have to type it out each time.
-Sass provides a shortcut for this:
-just write the namespace once,
-then nest each of the sub-properties within it.
-For example:
+CSS 有相當多屬性都有「命名空間(namespace)」，像是 `font-family`、`font-size`、`font-weight` 都屬於 `font` 命名空間。
+在 CSS 裡，如果你要設定屬於相同命名空間的一大堆屬性，你得要每次一個個輸入。
+Sass 提供了一個捷徑：只要寫一次命名空間，再用巢狀語法包住每個子屬性。
+例如：
 
     .funky {
       font: {
@@ -465,15 +453,15 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     .funky {
       font-family: fantasy;
       font-size: 30em;
       font-weight: bold; }
 
-The property namespace itself can also have a value.
-For example:
+命名空間的屬性本身也可以有值。
+例如：
 
     .funky {
       font: 2px/3px {
@@ -483,7 +471,7 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     .funky {
       font: 2px/3px;
@@ -491,23 +479,20 @@ is compiled to:
         font-size: 30em;
         font-weight: bold; }
 
-### Placeholder Selectors: `%foo`
+### 佔位選擇符：`%foo`
 
-Sass supports a special type of selector called a "placeholder selector".
-These look like class and id selectors, except the `#` or `.` is replaced by `%`.
-They're meant to be used with the [`@extend` directive](#extend);
-for more information see [`@extend`-Only Selectors](#placeholders).
+Sass 支援一種叫做「佔位選擇符」的特殊選擇符。
+它們看起來就像類別與 id 選擇符，只是 `#` 或 `.` 被 `%` 所取代。
+它們必須要配合 [`@extend` 指令](#extend) 使用。
+更多資訊請見 [`@extend` 獨享的選擇符](#placeholders).
 
-On their own, without any use of `@extend`, rulesets that use placeholder selectors
-will not be rendered to CSS.
+佔位選擇符如果沒有被 `@extend` 用到，它們裡面的規則將不會輸出成 CSS。
 
-## Comments: `/* */` and `//` {#comments}
+## 註解：`/* */` 與 `//` {#comments}
 
-Sass supports standard multiline CSS comments with `/* */`,
-as well as single-line comments with `//`.
-The multiline comments are preserved in the CSS output where possible,
-while the single-line comments are removed.
-For example:
+Sass 支援使用 `/* */` 的標準多行 CSS 註解，以及使用 `//` 的單行註解。
+多行註解會在 CSS 輸出裡盡可能地保留，單行注解則會被移除。
+例如：
 
     /* This comment is
      * several lines long.
@@ -520,7 +505,7 @@ For example:
     // since they use the single-line comment syntax.
     a { color: green; }
 
-is compiled to:
+被編譯成：
 
     /* This comment is
      * several lines long.
@@ -532,27 +517,26 @@ is compiled to:
     a {
       color: green; }
 
-When the first letter of a comment is `!`, the comment will be interpolated
-and always rendered into css output even in compressed output modes. This is useful for adding Copyright notices to your generated CSS.
+當註解的第一個字元是 `!` 的時候，即使是在壓縮輸出模式(compressed output mode)，這段註解也會被添加到 CSS 輸出結果裡。
+當你需要在生成的 CSS 裡添加版權聲明時，這個功能十分有用。
 
 ## SassScript {#sassscript}
 
-In addition to the plain CSS property syntax,
-Sass supports a small set of extensions called SassScript.
-SassScript allows properties to use
-variables, arithmetic, and extra functions.
-SassScript can be used in any property value.
+除了純粹的 CSS 屬性語法之外，Sass 也支援一個名為 SassScript 的小型擴充語法集合。
+SassScript 允許屬性使用變數、算術和額外的函式。
+SassScript 可以用在任何屬性值。
 
-SassScript can also be used to generate selectors and property names,
-which is useful when writing [mixins](#mixins).
-This is done via [interpolation](#interpolation_).
+SasScript 也可用於產生選擇符與屬性名稱，
+這在撰寫 [mixins](#mixins) 時很有用。
+這是靠 [插補(interpolation)](#interpolation_) 機制完成的。
 
-### Interactive Shell
+### 互動式界面
 
-You can easily experiment with SassScript using the interactive shell.
-To launch the shell run the sass command-line with the `-i` option. At the
-prompt, enter any legal SassScript expression to have it evaluated
-and the result printed out for you:
+你可以輕易地透過互動式界面來嘗試 SassScript。
+要啓動此界面，就在執行 Sass 命令列時使用 `-i` 選項。
+當提示符號出現時，輸入任何合法的 SassScript 表示式，就會執行並顯示
+
+當提示出現時，輸入任何合法的 SassScript 表示式，就可以執行它，並且把結果印出來給你：
 
     $ sass -i
     >> "Hello, Sassy World!"
@@ -621,7 +605,7 @@ There is one exception to this, though:
 when using [`#{}` interpolation](#interpolation_),
 quoted strings are unquoted.
 This makes it easier to use e.g. selector names in [mixins](#mixins).
-For example:
+例如：
 
     @mixin firefox-message($selector) {
       body.firefox #{$selector}:before {
@@ -631,7 +615,7 @@ For example:
 
     @include firefox-message(".header");
 
-is compiled to:
+被編譯成：
 
     body.firefox .header:before {
       content: "Hi, Firefox users!"; }
@@ -699,7 +683,7 @@ and will automatically convert between units if it can:
       width: 1in + 8pt;
     }
 
-is compiled to:
+被編譯成：
 
     p {
       width: 1.111in; }
@@ -729,7 +713,7 @@ They are:
 2. If the value is surrounded by parentheses.
 3. If the value is used as part of another arithmetic expression.
 
-For example:
+例如：
 
     p {
       font: 10px/8px;             // Plain CSS, no division
@@ -739,7 +723,7 @@ For example:
       margin-left: 5px + 8px/2px; // Uses +, does division
     }
 
-is compiled to:
+被編譯成：
 
     p {
       font: 10px/8px;
@@ -749,7 +733,7 @@ is compiled to:
 
 If you want to use variables along with a plain CSS `/`,
 you can use `#{}` to insert them.
-For example:
+例如：
 
     p {
       $font-size: 12px;
@@ -757,7 +741,7 @@ For example:
       font: #{$font-size}/#{$line-height};
     }
 
-is compiled to:
+被編譯成：
 
     p {
       font: 12px/30px; }
@@ -768,14 +752,14 @@ All arithmetic operations are supported for color values,
 where they work piecewise.
 This means that the operation is performed
 on the red, green, and blue components in turn.
-For example:
+例如：
 
     p {
       color: #010203 + #040506;
     }
 
 computes `01 + 04 = 05`, `02 + 05 = 07`, and `03 + 06 = 09`,
-and is compiled to:
+and 被編譯成：
 
     p {
       color: #050709; }
@@ -785,14 +769,14 @@ than to try to use color arithmetic to achieve the same effect.
 
 Arithmetic operations also work between numbers and colors,
 also piecewise.
-For example:
+例如：
 
     p {
       color: #010203 * 2;
     }
 
 computes `01 * 2 = 02`, `02 * 2 = 04`, and `03 * 2 = 06`,
-and is compiled to:
+and 被編譯成：
 
     p {
       color: #020406; }
@@ -803,13 +787,13 @@ or {Sass::Script::Functions#hsla hsla} functions)
 must have the same alpha value in order for color arithmetic
 to be done with them.
 The arithmetic doesn't affect the alpha value.
-For example:
+例如：
 
     p {
       color: rgba(255, 0, 0, 0.75) + rgba(0, 255, 0, 0.75);
     }
 
-is compiled to:
+被編譯成：
 
     p {
       color: rgba(255, 255, 0, 0.75); }
@@ -817,7 +801,7 @@ is compiled to:
 The alpha channel of a color can be adjusted using the
 {Sass::Script::Functions#opacify opacify} and
 {Sass::Script::Functions#transparentize transparentize} functions.
-For example:
+例如：
 
     $translucent-red: rgba(255, 0, 0, 0.5);
     p {
@@ -825,7 +809,7 @@ For example:
       background-color: transparentize($translucent-red, 0.25);
     }
 
-is compiled to:
+被編譯成：
 
     p {
       color: rgba(255, 0, 0, 0.9);
@@ -835,7 +819,7 @@ IE filters require all colors include the alpha layer, and be in
 the strict format of #AABBCCDD. You can more easily convert the
 color using the {Sass::Script::Functions#ie_hex_str ie_hex_str}
 function.
-For example:
+例如：
 
     $translucent-red: rgba(255, 0, 0, 0.5);
     $green: #00ff00;
@@ -843,7 +827,7 @@ For example:
       filter: progid:DXImageTransform.Microsoft.gradient(enabled='false', startColorstr='#{ie-hex-str($green)}', endColorstr='#{ie-hex-str($translucent-red)}');
     }
 
-is compiled to:
+被編譯成：
 
     div {
       filter: progid:DXImageTransform.Microsoft.gradient(enabled='false', startColorstr=#FF00FF00, endColorstr=#80FF0000);
@@ -857,7 +841,7 @@ The `+` operation can be used to concatenate strings:
       cursor: e + -resize;
     }
 
-is compiled to:
+被編譯成：
 
     p {
       cursor: e-resize; }
@@ -868,14 +852,14 @@ the result is a quoted string.
 Likewise, if an unquoted string is added to a quoted string
 (the unquoted string is to the left of the `+`),
 the result is an unquoted string.
-For example:
+例如：
 
     p:before {
       content: "Foo " + Bar;
       font-family: sans- + "serif";
     }
 
-is compiled to:
+被編譯成：
 
     p:before {
       content: "Foo Bar";
@@ -888,7 +872,7 @@ they are concatenated with a space:
       margin: 3px + 4px auto;
     }
 
-is compiled to:
+被編譯成：
 
     p {
       margin: 7px auto; }
@@ -900,7 +884,7 @@ place dynamic values within the string:
       content: "I ate #{5 + 10} pies!";
     }
 
-is compiled to:
+被編譯成：
 
     p:before {
       content: "I ate 15 pies!"; }
@@ -912,7 +896,7 @@ Null values are treated as empty strings for string interpolation:
       content: "I ate #{$value} pies!";
     }
 
-is compiled to:
+被編譯成：
 
     p:before {
       content: "I ate  pies!"; }
@@ -936,7 +920,7 @@ Parentheses can be used to affect the order of operations:
       width: 1em + (2em * 3);
     }
 
-is compiled to:
+被編譯成：
 
     p {
       width: 7em; }
@@ -950,7 +934,7 @@ that are called using the normal CSS function syntax:
       color: hsl(0, 100%, 50%);
     }
 
-is compiled to:
+被編譯成：
 
     p {
       color: #ff0000; }
@@ -985,7 +969,7 @@ and property names using #{} interpolation syntax:
       #{$attr}-color: blue;
     }
 
-is compiled to:
+被編譯成：
 
     p.foo {
       border-color: blue; }
@@ -994,7 +978,7 @@ It's also possible to use `#{}` to put SassScript into property values.
 In most cases this isn't any better than using a variable,
 but using `#{}` does mean that any operations near it
 will be treated as plain CSS.
-For example:
+例如：
 
     p {
       $font-size: 12px;
@@ -1002,7 +986,7 @@ For example:
       font: #{$font-size}/#{$line-height};
     }
 
-is compiled to:
+被編譯成：
 
     p {
       font: 12px/30px; }
@@ -1015,7 +999,7 @@ This means that if the variable has already been assigned to,
 it won't be re-assigned,
 but if it doesn't have a value yet, it will be given one.
 
-For example:
+例如：
 
     $content: "First content";
     $content: "Second content?" !default;
@@ -1026,7 +1010,7 @@ For example:
       new-content: $new_content;
     }
 
-is compiled to:
+被編譯成：
 
     #main {
       content: "First content";
@@ -1041,7 +1025,7 @@ Variables with `null` values are treated as unassigned by !default:
       content: $content;
     }
 
-is compiled to:
+被編譯成：
 
     #main {
       content: "Non-null content"; }
@@ -1109,7 +1093,7 @@ would all compile to
     @import "http://foo.com/bar";
     @import url(foo);
 
-It's also possible to import multiple files in one `@import`. For example:
+It's also possible to import multiple files in one `@import`. 例如：
 
     @import "rounded-corners", "text-shadow";
 
@@ -1119,7 +1103,7 @@ Imports may contain `#{}` interpolation, but only with certain restrictions.
 It's not possible to dynamically import a Sass file based on a variable;
 interpolation is only for CSS imports.
 As such, it only works with `url()` imports.
-For example:
+例如：
 
     $family: unquote("Droid+Sans");
     @import url("http://fonts.googleapis.com/css?family=\#{$family}");
@@ -1190,7 +1174,7 @@ putting all the selectors on the way inside the rule.
 This makes it easy to add media-specific styles
 without having to repeat selectors
 or break the flow of the stylesheet.
-For example:
+例如：
 
     .sidebar {
       width: 300px;
@@ -1199,7 +1183,7 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     .sidebar {
       width: 300px; }
@@ -1209,7 +1193,7 @@ is compiled to:
 
 `@media` queries can also be nested within one another.
 The queries will then be combined using the `and` operator.
-For example:
+例如：
 
     @media screen {
       .sidebar {
@@ -1219,7 +1203,7 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     @media screen and (orientation: landscape) {
       .sidebar {
@@ -1227,7 +1211,7 @@ is compiled to:
 
 Finally, `@media` queries can contain SassScript expressions (including
 variables, functions, and operators) in place of the feature names and feature
-values. For example:
+values. 例如：
 
     $media: screen;
     $feature: -webkit-min-device-pixel-ratio;
@@ -1239,7 +1223,7 @@ values. For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
       .sidebar {
@@ -1276,7 +1260,7 @@ and can bring non-semantic style concerns into the markup.
 
 The `@extend` directive avoids these problems
 by telling Sass that one selector should inherit the styles of another selector.
-For example:
+例如：
 
     .error {
       border: 1px #f00;
@@ -1320,7 +1304,7 @@ Thus the example above:
       border-width: 3px;
     }
 
-is compiled to:
+被編譯成：
 
     .error, .seriousError {
       border: 1px #f00;
@@ -1342,7 +1326,7 @@ In addition, it won't produce selectors that can't match anything, like `#main#f
 Class selectors aren't the only things that can be extended.
 It's possible to extend any selector involving only a single element,
 such as `.special.cool`, `a:hover`, or `a.user[href^="http://"]`.
-For example:
+例如：
 
     .hoverlink {
       @extend a:hover;
@@ -1350,7 +1334,7 @@ For example:
 
 Just like with classes, this means that all styles defined for `a:hover`
 are also applied to `.hoverlink`.
-For example:
+例如：
 
     .hoverlink {
       @extend a:hover;
@@ -1359,7 +1343,7 @@ For example:
       text-decoration: underline;
     }
 
-is compiled to:
+被編譯成：
 
     a:hover, .hoverlink {
       text-decoration: underline; }
@@ -1367,7 +1351,7 @@ is compiled to:
 Just like with `.error.intrusion` above,
 any rule that uses `a:hover` will also work for `.hoverlink`,
 even if they have other selectors as well.
-For example:
+例如：
 
     .hoverlink {
       @extend a:hover;
@@ -1376,7 +1360,7 @@ For example:
       font-weight: bold;
     }
 
-is compiled to:
+被編譯成：
 
     .comment a.user:hover, .comment .user.hoverlink {
       font-weight: bold; }
@@ -1385,7 +1369,7 @@ is compiled to:
 
 A single selector can extend more than one selector.
 This means that it inherits the styles of all the extended selectors.
-For example:
+例如：
 
     .error {
       border: 1px #f00;
@@ -1401,7 +1385,7 @@ For example:
       border-width: 3px;
     }
 
-is compiled to:
+被編譯成：
 
     .error, .seriousError {
       border: 1px #f00;
@@ -1428,7 +1412,7 @@ is the same as `@extend .error; @extend.attention`.
 
 It's possible for one selector to extend another selector
 that in turn extends a third.
-For example:
+例如：
 
     .error {
       border: 1px #f00;
@@ -1470,7 +1454,7 @@ It's compiled to:
 
 Selector sequences, such as `.foo .bar` or `.foo + .bar`, currently can't be extended.
 However, it is possible for nested selectors themselves to use `@extend`.
-For example:
+例如：
 
     #fake-links .link {
       @extend a;
@@ -1494,7 +1478,7 @@ is compiled to
 
 Sometimes a selector sequence extends another selector that appears in another sequence.
 In this case, the two sequences need to be merged.
-For example:
+例如：
 
     #admin .tabbar a {
       font-weight: bold;
@@ -1513,7 +1497,7 @@ When the two sequences being merged have no selectors in common,
 then two new selectors are generated:
 one with the first sequence before the second,
 and one with the second sequence before the first.
-For example:
+例如：
 
     #admin .tabbar a {
       font-weight: bold;
@@ -1522,7 +1506,7 @@ For example:
       @extend a;
     }
 
-is compiled to:
+被編譯成：
 
     #admin .tabbar a,
     #admin .tabbar #demo .overview .fakelink,
@@ -1542,7 +1526,7 @@ so the resulting selectors will merge those two ids:
       @extend a;
     }
 
-This is compiled to:
+This 被編譯成：
 
     #admin .tabbar a,
     #admin .tabbar .overview .fakelink,
@@ -1567,7 +1551,7 @@ Placeholder selectors look like class and id selectors,
 except the `#` or `.` is replaced by `%`.
 They can be used anywhere a class or id could,
 and on their own they prevent rulesets from being rendered to CSS.
-For example:
+例如：
 
     // This ruleset won't be rendered on its own.
     #context a%extreme {
@@ -1578,13 +1562,13 @@ For example:
 
 However, placeholder selectors can be extended, just like classes and ids.
 The extended selectors will be generated, but the base placeholder selector will not.
-For example:
+例如：
 
     .notice {
       @extend %extreme;
     }
 
-Is compiled to:
+被編譯成：
 
     #context a.notice {
       color: blue;
@@ -1653,7 +1637,7 @@ The `@debug` directive prints the value of a SassScript expression
 to the standard error output stream.
 It's useful for debugging Sass files
 that have complicated SassScript going on.
-For example:
+例如：
 
     @debug 10em + 12em;
 
@@ -1712,7 +1696,7 @@ anything other than `false` or `null`:
       @if null       { border: 3px double; }
     }
 
-is compiled to:
+被編譯成：
 
     p {
       border: 1px solid; }
@@ -1722,7 +1706,7 @@ and one `@else` statement.
 If the `@if` statement fails,
 the `@else if` statements are tried in order
 until one succeeds or the `@else` is reached.
-For example:
+例如：
 
     $type: monster;
     p {
@@ -1737,7 +1721,7 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     p {
       color: green; }
@@ -1761,7 +1745,7 @@ the form `from ... through`, the range *includes* the values of `<start>` and
       .item-#{$i} { width: 2em * $i; }
     }
 
-is compiled to:
+被編譯成：
 
     .item-1 {
       width: 2em; }
@@ -1778,7 +1762,7 @@ and `<list>` is a SassScript expression that returns a list.
 
 The `@each` rule sets `$var` to each item in the list,
 then outputs the styles it contains using that value of `$var`.
-For example:
+例如：
 
     @each $animal in puma, sea-slug, egret, salamander {
       .#{$animal}-icon {
@@ -1786,7 +1770,7 @@ For example:
       }
     }
 
-is compiled to:
+被編譯成：
 
     .puma-icon {
       background-image: url('/images/puma.png'); }
@@ -1805,7 +1789,7 @@ until the statement evaluates to `false`.
 This can be used to achieve more complex looping
 than the `@for` statement is capable of,
 although this is rarely necessary.
-For example:
+例如：
 
     $i: 6;
     @while $i > 0 {
@@ -1813,7 +1797,7 @@ For example:
       $i: $i - 2;
     }
 
-is compiled to:
+被編譯成：
 
     .item-6 {
       width: 12em; }
@@ -1855,7 +1839,7 @@ For example, the `large-text` mixin is defined as follows:
 Mixins may also contain selectors,
 possibly mixed with properties.
 The selectors can even contain [parent references](#referencing_parent_selectors_).
-For example:
+例如：
 
     @mixin clearfix {
       display: inline-block;
@@ -1877,7 +1861,7 @@ This takes the name of a mixin
 and optionally [arguments to pass to it](#mixin-arguments),
 and includes the styles defined by that mixin
 into the current rule.
-For example:
+例如：
 
     .page-title {
       @include large-text;
@@ -1885,7 +1869,7 @@ For example:
       margin-top: 10px;
     }
 
-is compiled to:
+被編譯成：
 
     .page-title {
       font-family: Arial;
@@ -1899,7 +1883,7 @@ Mixins may also be included outside of any rule
 (that is, at the root of the document)
 as long as they don't directly define any properties
 or use any parent references.
-For example:
+例如：
 
     @mixin silly-links {
       a {
@@ -1910,14 +1894,14 @@ For example:
 
     @include silly-links;
 
-is compiled to:
+被編譯成：
 
     a {
       color: blue;
       background-color: red; }
 
 Mixin definitions can also include other mixins.
-For example:
+例如：
 
     @mixin compound {
       @include highlighted-background;
@@ -1941,7 +1925,7 @@ the arguments are written as variable names separated by commas,
 all in parentheses after the name.
 Then when including the mixin,
 values can be passed in in the same manner.
-For example:
+例如：
 
     @mixin sexy-border($color, $width) {
       border: {
@@ -1953,7 +1937,7 @@ For example:
 
     p { @include sexy-border(blue, 1in); }
 
-is compiled to:
+被編譯成：
 
     p {
       border-color: blue;
@@ -1965,7 +1949,7 @@ using the normal variable-setting syntax.
 Then when the mixin is included,
 if it doesn't pass in that argument,
 the default value will be used instead.
-For example:
+例如：
 
     @mixin sexy-border($color, $width: 1in) {
       border: {
@@ -1977,7 +1961,7 @@ For example:
     p { @include sexy-border(blue); }
     h1 { @include sexy-border(blue, 2in); }
 
-is compiled to:
+被編譯成：
 
     p {
       border-color: blue;
@@ -2011,7 +1995,7 @@ example, a mixin for creating box shadows might take any number of shadows as
 arguments. For these situations, Sass supports "variable arguments," which are
 arguments at the end of a mixin declaration that take all leftover arguments and
 package them up as a [list](#lists). These arguments look just like normal
-arguments, but are followed by `...`. For example:
+arguments, but are followed by `...`. 例如：
 
     @mixin box-shadow($shadows...) {
       -moz-box-shadow: $shadows;
@@ -2023,7 +2007,7 @@ arguments, but are followed by `...`. For example:
       @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
     }
 
-is compiled to:
+被編譯成：
 
     .shadowed {
       -moz-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
@@ -2033,7 +2017,7 @@ is compiled to:
 
 Variable arguments can also be used when calling a mixin. Using the same syntax,
 you can expand a list of values so that each value is passed as a separate
-argument. For example:
+argument. 例如：
 
     @mixin colors($text, $background, $border) {
       color: $text;
@@ -2046,7 +2030,7 @@ argument. For example:
       @include colors($values...);
     }
 
-is compiled to:
+被編譯成：
 
     .primary {
       color: #ff0000;
@@ -2056,7 +2040,7 @@ is compiled to:
 
 You can use variable arguments to wrap a mixin and add additional styles without
 changing the argument signature of the mixin. If you do so, even keyword
-arguments will get passed through to the wrapped mixin. For example:
+arguments will get passed through to the wrapped mixin. 例如：
 
     @mixin wrapped-stylish-mixin($args...) {
       font-weight: bold;
@@ -2074,7 +2058,7 @@ It is possible to pass a block of styles to the mixin for placement within the s
 the mixin. The styles will appear at the location of any `@content` directives found within the mixin. This makes is possible to define abstractions relating to the construction of
 selectors and directives.
 
-For example:
+例如：
 
     @mixin apply-to-ie6-only {
       * html {
@@ -2130,7 +2114,7 @@ Compiles to:
     }
 
 Additionally, this makes it clear that the variables and mixins that are used within the
-passed block are related to the other styles around where the block is defined. For example:
+passed block are related to the other styles around where the block is defined. 例如：
 
     #sidebar {
       $sidebar-width: 300px;
@@ -2144,7 +2128,7 @@ passed block are related to the other styles around where the block is defined. 
 ## Function Directives {#function_directives}
 
 It is possible to define your own functions in sass and use them in any
-value or script context. For example:
+value or script context. 例如：
 
     $grid-width: 40px;
     $gutter-width: 10px;
@@ -2194,7 +2178,7 @@ and the HTML document they're styling.
 Each property has its own line,
 but the indentation isn't constant.
 Each rule is indented based on how deeply it's nested.
-For example:
+例如：
 
     #main {
       color: #fff;
@@ -2217,7 +2201,7 @@ Expanded is a more typical human-made CSS style,
 with each property and rule taking up one line.
 Properties are indented within the rules,
 but the rules aren't indented in any special way.
-For example:
+例如：
 
     #main {
       color: #fff;
@@ -2241,7 +2225,7 @@ Each CSS rule takes up only one line,
 with every property defined on that line.
 Nested rules are placed next to each other with no newline,
 while separate groups of rules have newlines between them.
-For example:
+例如：
 
     #main { color: #fff; background-color: #000; }
     #main p { width: 10em; }
@@ -2256,7 +2240,7 @@ and a newline at the end of the file.
 It also includes some other minor compressions,
 such as choosing the smallest representation for colors.
 It's not meant to be human-readable.
-For example:
+例如：
 
     #main{color:#fff;background-color:#000}#main p{width:10em}.huge{font-size:10em;font-weight:bold;text-decoration:underline}
 
