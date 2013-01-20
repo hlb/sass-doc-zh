@@ -574,7 +574,7 @@ SassScript 最簡單的使用方式就是操作變數。
 SassScript 支援六種主要的資料型別：
 
 * 數字（例如 `1.2`、`13`、`10px`）
-* 文字字串，無論有沒有括號（例如 `"foo"`、`'bar'`、`baz`）
+* 文字字串，無論有沒有引號（例如 `"foo"`、`'bar'`、`baz`）
 * 顏色（例如 `blue`、`#04a3f9`、`rgba(255, 0, 0, 0.5)`）
 * 布林值（例如 `true`、`false`）
 * 空值（例如 `null`）
@@ -585,19 +585,15 @@ SassScript 也支援所有其他 CSS 屬性值，
 然而，它不會對這類型別做任何操作。
 它們只會被當成一般字串看待。
 
-#### Strings {#sass-script-strings}
+#### 字串 {#sass-script-strings}
 
-CSS specifies two kinds of strings: those with quotes,
-such as `"Lucida Grande"` or `'http://sass-lang.com'`,
-and those without quotes, such as `sans-serif` or `bold`.
-SassScript recognizes both kinds,
-and in general if one kind of string is used in the Sass document,
-that kind of string will be used in the resulting CSS.
+CSS 提供兩種類型的字串：那些有引號的，像是 `"Lucida Grande"` 或 `'http://sass-lang.com'`，以及那些沒有引號的，像是 `sans-serif` 或 `bold`。
+SassScript 兩種都認得，並且如果一種類型的字串被用在 Sass 文件裡，同類型的字串也會被用在 CSS 結果裡。
 
-There is one exception to this, though:
-when using [`#{}` interpolation](#interpolation_),
-quoted strings are unquoted.
-This makes it easier to use e.g. selector names in [mixins](#mixins).
+不過這裡有個例外：
+當使用 [`#{}` 插補](#interpolation_) 時，字串的引號會被拿掉。
+這讓它被用在像是 [mixins](#mixins) 內的選擇符名稱，這類用途時容易一些。
+
 例如：
 
     @mixin firefox-message($selector) {
@@ -613,9 +609,8 @@ This makes it easier to use e.g. selector names in [mixins](#mixins).
     body.firefox .header:before {
       content: "Hi, Firefox users!"; }
 
-It's also worth noting that when using the [deprecated `=` property syntax](#sassscript),
-all strings are interpreted as unquoted,
-regardless of whether or not they're written with quotes.
+也值得注意的是，當使用[廢棄的 `=` 屬性語法](#sassscript)時，
+所有字串都會被拿掉引號，無論他們原本撰寫時有沒有引號。
 
 #### Lists
 
