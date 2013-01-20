@@ -718,37 +718,33 @@ CSS 允許 `/` 出現在屬性值裡，作為分隔數字的一種方法。
     p {
       font: 12px/30px; }
 
-#### Color Operations
+#### 色彩運算
 
-All arithmetic operations are supported for color values,
-where they work piecewise.
-This means that the operation is performed
-on the red, green, and blue components in turn.
+所有算術運算都支援色彩值，並且分段運作。
+這表示紅、綠、藍色會輪流運算。
 例如：
 
     p {
       color: #010203 + #040506;
     }
 
-computes `01 + 04 = 05`, `02 + 05 = 07`, and `03 + 06 = 09`,
-and 被編譯成：
+會計算 `01 + 04 = 05`、`02 + 05 = 07` 以及 `03 + 06 = 09`，
+並且被編譯成：
 
     p {
       color: #050709; }
 
-Often it's more useful to use {Sass::Script::Functions color functions}
-than to try to use color arithmetic to achieve the same effect.
+與其嘗試用色彩算數，{Sass::Script::Functions 色彩函式}更有用，並且能達到相同的效果。
 
-Arithmetic operations also work between numbers and colors,
-also piecewise.
+算術運算也能在數字與色彩間分段運作。
 例如：
 
     p {
       color: #010203 * 2;
     }
 
-computes `01 * 2 = 02`, `02 * 2 = 04`, and `03 * 2 = 06`,
-and 被編譯成：
+會計算 `01 * 2 = 02`、`02 * 2 = 04` 以及 `03 * 2 = 06`,
+並且被編譯成：
 
     p {
       color: #020406; }
