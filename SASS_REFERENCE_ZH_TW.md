@@ -612,39 +612,30 @@ SassScript 兩種都認得，並且如果一種類型的字串被用在 Sass 文
 也值得注意的是，當使用[廢棄的 `=` 屬性語法](#sassscript)時，
 所有字串都會被拿掉引號，無論他們原本撰寫時有沒有引號。
 
-#### Lists
+#### 列表
 
-Lists are how Sass represents the values of CSS declarations
-like `margin: 10px 15px 0 0` or `font-face: Helvetica, Arial, sans-serif`.
-Lists are just a series of other values, separated by either spaces or commas.
-In fact, individual values count as lists, too: they're just lists with one item.
+列表是 Sass 表示像 `margin: 10px 15px 0 0` 或 `font-face: Helvetica, Arial, sans-serif` 這類 CSS 宣告的值的方式。
+列表就只是一串的數值，用空白或逗號隔開。
+事實上，單獨的數值也被視為列表：它們就是只有一個項目的列表。
 
-On their own, lists don't do much,
-but the [Sass list functions](Sass/Script/Functions.html#list-functions)
-make them useful.
-The {Sass::Script::Functions#nth nth function} can access items in a list,
-the {Sass::Script::Functions#join join function} can join multiple lists together,
-and the {Sass::Script::Functions#append append function} can add items to lists.
-The [`@each` rule](#each-directive) can also add styles for each item in a list.
+列表自己做不了什麼事，但是 [Sass 列表函式](Sass/Script/Functions.html#list-functions)讓他們變得有用。
 
-In addition to containing simple values, lists can contain other lists.
-For example, `1px 2px, 5px 6px` is a two-item list
-containing the list `1px 2px` and the list `5px 6px`.
-If the inner lists have the same separator as the outer list,
-you'll need to use parentheses to make it clear
-where the inner lists start and stop.
-For example, `(1px 2px) (5px 6px)` is also a two-item list
-containing the list `1px 2px` and the list `5px 6px`.
-The difference is that the outer list is space-separated,
-where before it was comma-separated.
+{Sass::Script::Functions#nth nth 函式} 可以取用列表理的項目，
+{Sass::Script::Functions#join join 函式} 可以連接多個列表，
+{Sass::Script::Functions#append append 函式} 可以把項目添加到列表裡。
+[`@each` 規則](#each-directive) 也可以為列表裡的每個項目增添樣式。
 
-When lists are turned into plain CSS, Sass doesn't add any parentheses,
-since CSS doesn't understand them.
-That means that `(1px 2px) (5px 6px)` and `1px 2px 5px 6px`
-will look the same when they become CSS.
-However, they aren't the same when they're Sass:
-the first is a list containing two lists,
-while the second is a list containing four numbers.
+除了包含簡單的值，列表也可以包含其他列表。
+例如，`1px 2px, 5px 6px` 是一個有兩個項目的列表，它包含了列表 `1px 2px` 和列表 `5px 6px`。
+如果內層與外層的列表有相同的分隔符號，你需要使用括號來明確標示內層列表開始與結束之處。
+例如，`(1px 2px) (5px 6px)` 也是一個有兩個項目的列表，它包含了列表 `1px 2px` 和列表 `5px 6px`。
+差別在於外層列表是用空白隔開，而前一個是用逗號隔開。
+
+當列表被轉換成純 CSS 的時候，Sass 不會加上任何括號，因為 CSS 並不認得它們。
+這代表說，當 `(1px 2px) (5px 6px)` 與 `1px 2px 5px 6px` 被轉換成 CSS 的時候，看起來會是一樣的。
+然而，它們在 Sass 中是不同的：
+第一個是包含兩個列表的列表，
+第二個是包含四個數字的列表。
 
 Lists can also have no items in them at all.
 These lists are represented as `()`.
