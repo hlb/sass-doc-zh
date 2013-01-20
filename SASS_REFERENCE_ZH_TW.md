@@ -664,30 +664,26 @@ SassScript 支援數字的標準算術運算（`+`、`-`、`*`、`/`、`%`），
     p {
       width: 1.111in; }
 
-Relational operators
-(`<`, `>`, `<=`, `>=`)
-are also supported for numbers,
-and equality operators
-(`==`, `!=`)
-are supported for all types.
+數字也支援關係運算符
+（`<`、`>`、`<=`、`>=`），
+而所有類別都支援等式運算符
+（`==` 和 `!=`）。
 
-##### Division and `/`
+##### 除法和 `/`
 {#division-and-slash}
 
-CSS allows `/` to appear in property values
-as a way of separating numbers.
-Since SassScript is an extension of the CSS property syntax,
-it must support this, while also allowing `/` to be used for division.
-This means that by default, if two numbers are separated by `/` in SassScript,
-then they will appear that way in the resulting CSS.
+CSS 允許 `/` 出現在屬性值裡，作為分隔數字的一種方法。
+既然 SassScript 是 CSS 屬性語法的擴充版本，
+它就必須支援這種方法，同時也允許 `/` 可以用在除法上。
+這代表說，如果在 SassScript 裡有兩個數字用 `/` 隔開，預設行為應該是在 CSS 結果裡如實呈現。
 
-However, there are three situations where the `/` will be interpreted as division.
-These cover the vast majority of cases where division is actually used.
-They are:
+然而，有三種狀況下 `/` 會被視為除法。
+它們包含了絕大多數狀況下，除法真正被使用到的範例，
+這些狀況是：
 
-1. If the value, or any part of it, is stored in a variable.
-2. If the value is surrounded by parentheses.
-3. If the value is used as part of another arithmetic expression.
+1. 如果數值，或是它的任何部分，是儲存在一個變數裡。
+2. 如果數值被括號包住。
+3. 如果數值被用在另一個算數式中的一部分。
 
 例如：
 
@@ -707,8 +703,8 @@ They are:
       height: 250px;
       margin-left: 9px; }
 
-If you want to use variables along with a plain CSS `/`,
-you can use `#{}` to insert them.
+如果你只是想要在純 CSS 的 `/` 中使用變數，
+你可以用 `#{}` 插入它們。
 例如：
 
     p {
