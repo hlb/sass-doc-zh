@@ -664,9 +664,9 @@ SassScript 支援數字的標準算術運算（`+`、`-`、`*`、`/`、`%`），
     p {
       width: 1.111in; }
 
-數字也支援關係運算符
+數字也支援關係運算子
 （`<`、`>`、`<=`、`>=`），
-而所有類別都支援等式運算符
+而所有類別都支援等式運算子
 （`==` 和 `!=`）。
 
 ##### 除法和 `/`
@@ -749,12 +749,8 @@ CSS 允許 `/` 出現在屬性值裡，作為分隔數字的一種方法。
     p {
       color: #020406; }
 
-Note that colors with an alpha channel
-(those created with the {Sass::Script::Functions#rgba rgba}
-or {Sass::Script::Functions#hsla hsla} functions)
-must have the same alpha value in order for color arithmetic
-to be done with them.
-The arithmetic doesn't affect the alpha value.
+注意那些有 alpha channel 的顏色（像是那些用 {Sass::Script::Functions#rgba rgba} 或 {Sass::Script::Functions#hsla hsla} 函式建立的）必須要有一樣的 alpha 值，才能執行色彩運算。
+色彩運算不會影響 alpha 值。
 例如：
 
     p {
@@ -766,9 +762,7 @@ The arithmetic doesn't affect the alpha value.
     p {
       color: rgba(255, 255, 0, 0.75); }
 
-The alpha channel of a color can be adjusted using the
-{Sass::Script::Functions#opacify opacify} and
-{Sass::Script::Functions#transparentize transparentize} functions.
+一個顏色的 alpha channel 可以透過 {Sass::Script::Functions#opacify opacify} 與 {Sass::Script::Functions#transparentize transparentize} 函式調整。
 例如：
 
     $translucent-red: rgba(255, 0, 0, 0.5);
@@ -783,10 +777,7 @@ The alpha channel of a color can be adjusted using the
       color: rgba(255, 0, 0, 0.9);
       background-color: rgba(255, 0, 0, 0.25); }
 
-IE filters require all colors include the alpha layer, and be in
-the strict format of #AABBCCDD. You can more easily convert the
-color using the {Sass::Script::Functions#ie_hex_str ie_hex_str}
-function.
+IE 過濾器(filters) 需要包含 alpha 層的所有顏色，並且得用 #AABBCCDD 這樣嚴格的格式。你可以輕鬆地利用 {Sass::Script::Functions#ie_hex_str ie_hex_str} 函式轉換顏色。
 例如：
 
     $translucent-red: rgba(255, 0, 0, 0.5);
@@ -801,25 +792,25 @@ function.
       filter: progid:DXImageTransform.Microsoft.gradient(enabled='false', startColorstr=#FF00FF00, endColorstr=#80FF0000);
     }
 
-#### String Operations
+#### 字串運算
 
-The `+` operation can be used to concatenate strings:
+`+` 可以用來連接字串：
 
     p {
       cursor: e + -resize;
     }
 
-被編譯成：
+會被編譯成：
 
     p {
       cursor: e-resize; }
 
-Note that if a quoted string is added to an unquoted string
-(that is, the quoted string is to the left of the `+`),
-the result is a quoted string.
-Likewise, if an unquoted string is added to a quoted string
-(the unquoted string is to the left of the `+`),
-the result is an unquoted string.
+ 要注意的是，如果有引號的字串被添加到沒有引號的字串
+（這是指說有引號的字串在 `+` 的左邊），
+結果會是一個有引號的字串。
+同樣的，如果沒有引號的字串被添加到有引號的字串
+（沒有引號的字串在 `+` 的左邊），
+結果會是一個沒有引號的字串。
 例如：
 
     p:before {
@@ -833,8 +824,7 @@ the result is an unquoted string.
       content: "Foo Bar";
       font-family: sans-serif; }
 
-By default, if two values are placed next to one another,
-they are concatenated with a space:
+預設狀況下，如我果兩個值彼此相鄰，他們會用空白串接。
 
     p {
       margin: 3px + 4px auto;
@@ -845,8 +835,7 @@ they are concatenated with a space:
     p {
       margin: 7px auto; }
 
-Within a string of text, #{} style interpolation can be used to
-place dynamic values within the string:
+在一段字串裡，#{} 形式的插補功能可以用來在字串裡加上動態值：
 
     p:before {
       content: "I ate #{5 + 10} pies!";
@@ -857,7 +846,7 @@ place dynamic values within the string:
     p:before {
       content: "I ate 15 pies!"; }
 
-Null values are treated as empty strings for string interpolation:
+Null 值在字串插補時會被視為空字串：
 
     $value: null;
     p:before {
@@ -869,16 +858,14 @@ Null values are treated as empty strings for string interpolation:
     p:before {
       content: "I ate  pies!"; }
 
-#### Boolean Operations
+#### 布林運算
 
-SassScript supports `and`, `or`, and `not` operators
-for boolean values.
+SassScript 支援 `and`、`or` 和 `not` 等布林運算子。
 
-#### List Operations
+#### 列表運算
 
-Lists don't support any special operations.
-Instead, they're manipulated using the
-[list functions](Sass/Script/Functions.html#list-functions).
+列表不支援任何特殊運算。
+但他們可以用[列表函式](Sass/Script/Functions.html#list-functions)操作。
 
 ### Parentheses
 
