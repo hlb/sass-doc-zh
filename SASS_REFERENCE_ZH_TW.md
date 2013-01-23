@@ -867,9 +867,9 @@ SassScript 支援 `and`、`or` 和 `not` 等布林運算子。
 列表不支援任何特殊運算。
 但他們可以用[列表函式](Sass/Script/Functions.html#list-functions)操作。
 
-### Parentheses
+### 括號
 
-Parentheses can be used to affect the order of operations:
+括號可以用來影響運算的順序：
 
     p {
       width: 1em + (2em * 3);
@@ -880,10 +880,10 @@ Parentheses can be used to affect the order of operations:
     p {
       width: 7em; }
 
-### Functions
+### 函式
 
-SassScript defines some useful functions
-that are called using the normal CSS function syntax:
+SassScript 定義了一些有用的函式，
+他們可以像一般 CSS 函式語法一樣被呼叫：
 
     p {
       color: hsl(0, 100%, 50%);
@@ -894,26 +894,25 @@ that are called using the normal CSS function syntax:
     p {
       color: #ff0000; }
 
-#### Keyword Arguments
+#### 關鍵字參數(Keyword Arguments)
 
-Sass functions can also be called using explicit keyword arguments.
-The above example can also be written as:
+Sass 函式也可以使用明確的關鍵字參數來呼叫。
+上面的範例也可以這樣寫：
 
     p {
       color: hsl($hue: 0, $saturation: 100%, $lightness: 50%);
     }
 
-While this is less concise, it can make the stylesheet easier to read.
-It also allows functions to present more flexible interfaces,
-providing many arguments without becoming difficult to call.
+雖然不大簡潔，但是它讓樣式表更容易閱讀。
+它也允許函式提供更靈活的介面，
+在提供許多參數之餘，不會變得難以呼叫。
 
-Named arguments can be passed in any order, and arguments with default values can be omitted.
-Since the named arguments are variable names, underscores and dashes can be used interchangeably.
+具名參數(named arguments)可以以任何順序傳入，而且有預設值的參數可以省略。
+由於具名參數是變數名稱，底線(underscores)和破折號(dashes)可以交換使用。
 
-See {Sass::Script::Functions} for a full listing of Sass functions and their argument names,
-as well as instructions on defining your own in Ruby.
+完整的 Sass 函式列表和它們的參數名稱，以及在 Ruby 裡定義你自己的函式的步驟，請見 {Sass::Script::Functions}。
 
-### Interpolation: `#{}` {#interpolation_}
+### 插補(Interpolation)：`#{}` {#interpolation_}
 
 You can also use SassScript variables in selectors
 and property names using #{} interpolation syntax:
