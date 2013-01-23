@@ -523,7 +523,7 @@ Sass 支援使用 `/* */` 的標準多行 CSS 註解，以及使用 `//` 的單�
 
 ## SassScript {#sassscript}
 
-除了純粹的 CSS 屬性語法之外，Sass 也支援一個名為 SassScript 的小型擴充語法集合。
+除了純 CSS 屬性語法之外，Sass 也支援一個名為 SassScript 的小型擴充語法集合。
 SassScript 允許屬性使用變數、算術和額外的函式。
 SassScript 可以用在任何屬性值。
 
@@ -914,8 +914,7 @@ Sass 函式也可以使用明確的關鍵字參數來呼叫。
 
 ### 插補(Interpolation)：`#{}` {#interpolation_}
 
-You can also use SassScript variables in selectors
-and property names using #{} interpolation syntax:
+你也可以在選擇符與屬性名稱中，透過 #{} 插補語法來使用 SassScript 變數：
 
     $name: foo;
     $attr: border;
@@ -928,10 +927,9 @@ and property names using #{} interpolation syntax:
     p.foo {
       border-color: blue; }
 
-It's also possible to use `#{}` to put SassScript into property values.
-In most cases this isn't any better than using a variable,
-but using `#{}` does mean that any operations near it
-will be treated as plain CSS.
+也能夠用 `#{}` 來把 SassScript 放到屬性值裡。
+在大多數情況下，這沒有比使用變數來得高明，
+但是使用 `#{}` 意味著它附近任何的運算符號都會被視為純 CSS。
 例如：
 
     p {
@@ -945,14 +943,12 @@ will be treated as plain CSS.
     p {
       font: 12px/30px; }
 
-### Variable Defaults: `!default`
+### 變數預設值：`!default`
 
-You can assign to variables if they aren't already assigned
-by adding the `!default` flag to the end of the value.
-This means that if the variable has already been assigned to,
-it won't be re-assigned,
-but if it doesn't have a value yet, it will be given one.
-
+你可以在變數尚未指定時，透過在值的結尾處添加 `!default` 標記來指定變數。
+這代表說，如果該變數已經被指定，
+就不會被再次指定，
+但是如果它沒有指定數值，就會被給定一個。
 例如：
 
     $content: "First content";
@@ -970,7 +966,7 @@ but if it doesn't have a value yet, it will be given one.
       content: "First content";
       new-content: "First time reference"; }
 
-Variables with `null` values are treated as unassigned by !default:
+變數的值如果是 `null` 的話，會被 !default 當作沒有指定：
 
     $content: null;
     $content: "Non-null content" !default;
