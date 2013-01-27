@@ -980,14 +980,11 @@ Sass 函式也可以使用明確的關鍵字參數來呼叫。
     #main {
       content: "Non-null content"; }
 
-## `@`-Rules and Directives {#directives}
+## `@` 規則與控制指令 {#directives}
 
-Sass supports all CSS3 `@`-rules,
-as well as some additional Sass-specific ones
-known as "directives."
-These have various effects in Sass, detailed below.
-See also [control directives](#control_directives)
-and [mixin directives](#mixins).
+Sass 支援所有 CSS3 `@` 規則，以及一些額外的 Sass 專屬的規則，被稱為「指令(directives)」。
+這些規則在 Sass 裡有不同的效用，詳述如下。
+也可參考[控制指令(control directives)](#control_directives)與[混搭指令(mixin directives)](#mixins).
 
 ### `@import` {#import}
 
