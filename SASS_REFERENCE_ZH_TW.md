@@ -106,192 +106,174 @@ Sass 樣式表跟視圖(views)的運作方式不同。
 
 ### 選項
 
-Options can be set by setting the {Sass::Plugin::Configuration#options Sass::Plugin#options} hash
-in `environment.rb` in Rails or `config.ru` in Rack...
+在 Rails 的 `environment.rb` 或 Rack 的 `config.ru` 可以透過使用 {Sass::Plugin::Configuration#options Sass::Plugin#options} 雜湊進行設定
 
     Sass::Plugin.options[:style] = :compact
 
-...or by setting the `Merb::Plugin.config[:sass]` hash in `init.rb` in Merb...
+… 或者在 Merb 的 `init.rb` 使用 `Merb::Plugin.config[:sass]` 雜湊設定
 
     Merb::Plugin.config[:sass][:style] = :compact
 
-...or by passing an options hash to {Sass::Engine#initialize}.
-All relevant options are also available via flags
-to the `sass` and `scss` command-line executables.
-Available options are:
+... 或者傳入一個選項雜湊到 {Sass::Engine#initialize}.
+
+所有對應的選項都可以透過旗標在 `sass` 和 `scss` 命令列執行.
+
+可用的選項有：
 
 {#style-option} `:style`
-: Sets the style of the CSS output.
-  See [Output Style](#output_style).
+: 設定 CSS 輸出風格.
+  請參考 [輸出風格](#output_style).
 
 {#syntax-option} `:syntax`
-: The syntax of the input file, `:sass` for the indented syntax
-  and `:scss` for the CSS-extension syntax.
-  This is only useful when you're constructing {Sass::Engine} instances yourself;
-  it's automatically set properly when using {Sass::Plugin}.
-  Defaults to `:sass`.
+: 輸入檔案的語法， `:sass` 用於縮排式語法
+  以及 `:scss` 用於 CSS-extension 式語法.
+  這在建構你自己的 {Sass::Engine} 實例時非常有用;
+  他會自動設定正確當你使用 {Sass::Plugin}.
+  預設值是 `:sass`.
 
 {#property_syntax-option} `:property_syntax`
-: Forces indented-syntax documents to use one syntax for properties.
-  If the correct syntax isn't used, an error is thrown.
-  `:new` forces the use of a colon or equals sign
-  after the property name.
+: 強制縮排式語法的文件使用一種描述屬性的語法。
+  如果沒有使用正確的語法，將會拋出錯誤。
+  `:new` 強制屬性後面使用冒號或等於。
   例如： `color: #0f3`
-  or `width: $main_width`.
-  `:old` forces the use of a colon
-  before the property name.
+  或 `width: $main_width`.
+  `:old` 強制屬性前面使用冒號。
   例如： `:color #0f3`
-  or `:width $main_width`.
-  By default, either syntax is valid.
-  This has no effect on SCSS documents.
+  或 `:width $main_width`.
+  在預設情況，兩者都是正確的。
+  這在 SCSS 文件中並不會生效。
 
 {#cache-option} `:cache`
-: Whether parsed Sass files should be cached,
-  allowing greater speed. Defaults to true.
+: 編譯過的 Sass 文件是否被快取，能夠提高重新編譯速度。 預設為 true.
 
 {#read_cache-option} `:read_cache`
-: If this is set and `:cache` is not,
-  only read the Sass cache if it exists,
-  don't write to it if it doesn't.
+: 如果被設定而且 `:cache` 沒有設定,
+  只會讀取存在的 Sass 快取，
+  並且不寫入如果檔案不存在。
 
 {#cache_store-option} `:cache_store`
-: If this is set to an instance of a subclass of {Sass::CacheStores::Base},
-  that cache store will be used to store and retrieve
-  cached compilation results.
-  Defaults to a {Sass::CacheStores::Filesystem} that is
-  initialized using the [`:cache_location` option](#cache_location-option).
+: 如果這是設定為 {Sass::CacheStores::Base} 子類的實例，
+  那麼這個快取儲存將會用於儲存與檢索
+  快取編譯結果。
+  預設是 {Sass::CacheStores::Filesystem} 透過
+  使用 [`:cache_location` 選項](#cache_location-option) 初始化。
 
 {#never_update-option} `:never_update`
-: Whether the CSS files should never be updated,
-  even if the template file changes.
-  Setting this to true may give small performance gains.
-  It always defaults to false.
-  Only has meaning within Rack, Ruby on Rails, or Merb.
+: CSS 檔案永遠不更新，
+  即使樣板檔案被更改。
+  設定這個選項為 true 可能會獲得少量的效能提升。
+  這個選項總是預設為 false.
+  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
 
 {#always_update-option} `:always_update`
-: Whether the CSS files should be updated every
-  time a controller is accessed,
-  as opposed to only when the template has been modified.
-  Defaults to false.
-  Only has meaning within Rack, Ruby on Rails, or Merb.
+: 每次 controller 被訪問時 CSS 檔案總是會更新，
+  而不是只在樣板檔案被修改的時候。
+  預設為 false.
+  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
 
 {#always_check-option} `:always_check`
-: Whether a Sass template should be checked for updates every
-  time a controller is accessed,
-  as opposed to only when the server starts.
-  If a Sass template has been updated,
-  it will be recompiled and will overwrite the corresponding CSS file.
-  Defaults to false in production mode, true otherwise.
-  Only has meaning within Rack, Ruby on Rails, or Merb.
+: 每次 controller 被訪問時總是檢查 Sass 樣板檔案，
+  而不是只在伺服器起動時。
+  如果 Sass 樣板檔案被更新，
+  它將會重新編譯並且覆蓋對應的 CSS 檔案。
+  預設是 false 在 production 模式，在其他情況則為 true.
+  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
 
 {#poll-option} `:poll`
-: When true, always use the polling backend for {Sass::Plugin::Compiler#watch}
-  rather than the native filesystem backend.
+: 當設定為 true 時， 總是使用 {Sass::Plugin::Compiler#watch} 作為後端
+  而非使用原生檔案系統作為後端。
 
 {#full_exception-option} `:full_exception`
-: Whether an error in the Sass code
-  should cause Sass to provide a detailed description
-  within the generated CSS file.
-  If set to true, the error will be displayed
-  along with a line number and source snippet
-  both as a comment in the CSS file
-  and at the top of the page (in supported browsers).
-  Otherwise, an exception will be raised in the Ruby code.
-  Defaults to false in production mode, true otherwise.
-  Only has meaning within Rack, Ruby on Rails, or Merb.
+: 不論是否有錯誤在 Sass 原始碼
+  都應讓 Sass 提供詳細的說明
+  在產生的 CSS 檔案中。
+  如果設定為 true 那麼錯誤將會同時顯示
+  行號與原始碼的註解在 CSS 檔案
+  以及頁面的最上方（在支援的瀏覽器中）
+  另外，一個例外將會在 Ruby 中被呼叫。
+  預設為 false 在 production 模式，在其他情況則為 true.
+  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
 
 {#template_location-option} `:template_location`
-: A path to the root sass template directory for your application.
-  If a hash, `:css_location` is ignored and this option designates
-  a mapping between input and output directories.
-  May also be given a list of 2-element lists, instead of a hash.
-  Defaults to `css_location + "/sass"`.
-  Only has meaning within Rack, Ruby on Rails, or Merb.
-  Note that if multiple template locations are specified, all
-  of them are placed in the import path, allowing you to import
-  between them.
-  **Note that due to the many possible formats it can take,
-  this option should only be set directly, not accessed or modified.
-  Use the {Sass::Plugin::Configuration#template_location_array Sass::Plugin#template_location_array},
+: Sass 樣板檔案的根目錄路徑在你的應用程式中。
+  如果是一個砸湊，那麼 `:css_location` 會被忽略，並且這個選項將會指定輸入與輸出的資料夾。
+  也可以給予兩個元素的列表，而非雜湊。
+  預設是 `css_location + "/sass"`.
+  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
+  註記，如果有多個樣板位置被指定，它們都會被放入匯入路徑，讓你可以在他們之間匯入。
+  **註記，由於可以採用多種可能的格式，
+  這個選項應該直接設定而非訪問或修改。
+  使用 {Sass::Plugin::Configuration#template_location_array Sass::Plugin#template_location_array},
   {Sass::Plugin::Configuration#add_template_location Sass::Plugin#add_template_location},
-  and {Sass::Plugin::Configuration#remove_template_location Sass::Plugin#remove_template_location} methods instead**.
+  和 {Sass::Plugin::Configuration#remove_template_location Sass::Plugin#remove_template_location} 方法代替**.
 
 {#css_location-option} `:css_location`
-: The path where CSS output should be written to.
-  This option is ignored when `:template_location` is a Hash.
-  Defaults to `"./public/stylesheets"`.
-  Only has meaning within Rack, Ruby on Rails, or Merb.
+: CSS 檔案寫入的路徑。
+  這個選項將會被忽略，當 `:template_location` 是一個雜湊。
+  預設為 `"./public/stylesheets"`.
+  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
 
 {#cache_location-option} `:cache_location`
-: The path where the cached `sassc` files should be written to.
-  Defaults to `"./tmp/sass-cache"` in Rails and Merb,
-  or `"./.sass-cache"` otherwise.
-  If the [`:cache_store` option](#cache_location-option) is set,
-  this is ignored.
+: 快取 `sassc` 檔案寫入的路徑。
+  預設為 `"./tmp/sass-cache"` 在 Rails and Merb,
+  或者 `"./.sass-cache"` 其他情況。
+  如果 [`:cache_store` 選項](#cache_location-option) 被設定，
+  這個選項將會被忽略。
 
 {#unix_newlines-option} `:unix_newlines`
-: If true, use Unix-style newlines when writing files.
-  Only has meaning on Windows, and only when Sass is writing the files
-  (in Rack, Rails, or Merb, when using {Sass::Plugin} directly,
-  or when using the command-line executable).
+: 如果為 true 則使用 Unix-style 換行方式寫入檔案.
+  只有在 Windows 時以及 Sass 寫入檔案時有意義
+  (在 Rack, Rails, 或 Merb, 當直接使用 {Sass::Plugin}
+  或使用命令列執行)
 
 {#filename-option} `:filename`
-: The filename of the file being rendered.
-  This is used solely for reporting errors,
-  and is automatically set when using Rack, Rails, or Merb.
+: 正在被渲染的檔案名稱。
+  這只用於錯誤報告，
+  當使用 Rack, Rails, 或 Merb 時會被自動設定。
 
 {#line-option} `:line`
-: The number of the first line of the Sass template.
-  Used for reporting line numbers for errors.
-  This is useful to set if the Sass template is embedded in a Ruby file.
+: Sass 樣板的第一行行號。
+  用於錯誤回報時的行號。
+  當 Sass 樣板是嵌入在 Ruby 檔案時非常有用。
 
 {#load_paths-option} `:load_paths`
-: An array of filesystem paths or importers which should be searched
-  for Sass templates imported with the [`@import`](#import) directive.
-  These may be strings, `Pathname` objects, or subclasses of {Sass::Importers::Base}.
-  This defaults to the working directory and, in Rack, Rails, or Merb,
-  whatever `:template_location` is.
-  The load path is also informed by {Sass.load_paths}
-  and the `SASS_PATH` environment variable.
+: 一個陣列、檔案系統的路徑或匯入器（應要搜尋 Sass 樣板）用於指定 [`@import`](#import) 的目標。
+  可能是字串， `Pathname` 物件，或是 {Sass::Importers::Base} 的子類。
+  預設是目前工作的資料夾，在 Rack, Rails, 或 Merb,
+  則是 `:template_location`。
+  讀取路徑也尋找 {Sass.load_paths}
+  和 `SASS_PATH` 環境變數設定的路徑。
 
 {#filesystem_importer-option} `:filesystem_importer`
-: A {Sass::Importers::Base} subclass used to handle plain string load paths.
-  This should import files from the filesystem.
-  It should be a Class object inheriting from {Sass::Importers::Base}
-  with a constructor that takes a single string argument (the load path).
-  Defaults to {Sass::Importers::Filesystem}.
+: 一個 {Sass::Importers::Base} 子類用於處理純文字的讀取路徑。
+  這必須從檔案系統匯入檔案。
+  它必須是個類別物件繼承自 {Sass::Importers::Base}
+  並有一個建構子接受一個字串參數 (讀取路徑).
+  預設為 {Sass::Importers::Filesystem}.
 
 {#line_numbers-option} `:line_numbers`
-: When set to true, causes the line number and file
-  where a selector is defined to be emitted into the compiled CSS
-  as a comment. Useful for debugging, especially when using imports
-  and mixins.
-  This option may also be called `:line_comments`.
-  Automatically disabled when using the `:compressed` output style
-  or the `:debug_info`/`:trace_selectors` options.
+: 當設定為 true 時會將生成該選擇器定義的行號及檔案在 CSS 編譯時輸出在註解。對除錯非常有用，尤其是使用 import 和 mixin 時。
+  這個選項也被叫做 `:line_comments`.
+  當使用 `:compressed` 輸出風格
+  或 `:debug_info`/`:trace_selectors` 選項時會自動停用。
 
 {#trace_selectors-option} `:trace_selectors`
-: When set to true, emit a full trace of imports and mixins before
-  each selector. This can be helpful for in-browser debugging of
-  stylesheet imports and mixin includes. This option supersedes
-  the `:line_comments` option and is superseded by the
-  `:debug_info` option. Automatically disabled when using the
-  `:compressed` output style.
+: 當設定為 true 時顯示完整的 import 和 mixin 追蹤在選擇器前。 這可以幫助在瀏覽器中樣式表的 imports 和 mixin 除錯。 
+  這個選項可以用 `:line_comments` 選項取代而且被
+  `:debug_info` 選項取代。 當使用
+  `:compressed` 輸出風格時，將會被自動停用。
 
 {#debug_info-option} `:debug_info`
-: When set to true, causes the line number and file
-  where a selector is defined to be emitted into the compiled CSS
-  in a format that can be understood by the browser.
-  Useful in conjunction with [the FireSass Firebug extension](https://addons.mozilla.org/en-US/firefox/addon/103988)
-  for displaying the Sass filename and line number.
-  Automatically disabled when using the `:compressed` output style.
+: 當設定為 true 時會將生成該選擇器的行號及檔案在 CSS 編譯為瀏覽器可以理解的格式。
+  與 [the FireSass Firebug extension](https://addons.mozilla.org/en-US/firefox/addon/103988) 搭配使用時非常有用於
+  呈現 Sass 的檔案及行號。
+  當使用 `:compressed` 輸出風格，將會被自動停用。
 
 {#custom-option} `:custom`
-: An option that's available for individual applications to set
-  to make data available to {Sass::Script::Functions custom Sass functions}.
+: 一個選項可以讓個人應用產生資料給 {Sass::Script::Functions custom Sass functions}.
 
 {#quiet-option} `:quiet`
-: When set to true, causes warnings to be disabled.
+: 當設定為 true 時，將會導致警告被停用。
 
 ### 語法選擇
 
