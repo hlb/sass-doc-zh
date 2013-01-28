@@ -591,7 +591,7 @@ CSS 提供兩種類型的字串：那些有引號的，像是 `"Lucida Grande"` 
 SassScript 兩種都認得，並且如果一種類型的字串被用在 Sass 文件裡，同類型的字串也會被用在 CSS 結果裡。
 
 不過這裡有個例外：
-當使用 [`#{}` 插補](#interpolation_) 時，字串的引號會被拿掉。
+當使用 [`#{}` interpolation](#interpolation_) 時，字串的引號會被拿掉。
 這讓它被用在像是 [mixins](#mixins) 內的選擇符名稱，這類用途時容易一些。
 
 例如：
@@ -984,78 +984,69 @@ Sass 函式也可以使用明確的關鍵字參數來呼叫。
 
 Sass 支援所有 CSS3 `@` 規則，以及一些額外的 Sass 專屬的規則，被稱為「指令(directives)」。
 這些規則在 Sass 裡有不同的效用，詳述如下。
-也可參考[控制指令(control directives)](#control_directives)與[混搭指令(mixin directives)](#mixins).
+也可參考[控制指令(control directives)](#control_directives)與 [mixin 指令(mixin directives)](#mixins).
 
 ### `@import` {#import}
 
-Sass extends the CSS `@import` rule
-to allow it to import SCSS and Sass files.
-All imported SCSS and Sass files will be merged together
-into a single CSS output file.
-In addition, any variables or [mixins](#mixins)
-defined in imported files can be used in the main file.
+Sass 擴充了 CSS 的 `@import` 規則，讓它能夠匯入 SCSS 與 Sass 檔案。
+所有匯入的 SCSS 與 Sass 檔案會被結合起來變成單個 CSS 輸出檔案。
 
-Sass looks for other Sass files in the current directory,
-and the Sass file directory under Rack, Rails, or Merb.
-Additional search directories may be specified
-using the [`:load_paths`](#load_paths-option) option,
-or the `--load-path` option on the command line.
+此外，任何匯入檔案中定義的變數或 [mixins](#mixins) 都可以被用在主檔案裡。
 
-`@import` takes a filename to import.
-By default, it looks for a Sass file to import directly,
-but there are a few circumstances under which it will compile to a CSS `@import` rule:
+Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 Merb 程式則是在 Sass 檔案目錄。
+額外的搜尋目錄可以使用 [`:load_paths`](#load_paths-option) 選項指定，或是使用命令列的 `--load-path` 選項。
 
-* If the file's extension is `.css`.
-* If the filename begins with `http://`.
-* If the filename is a `url()`.
-* If the `@import` has any media queries.
+`@import` 用檔名進行匯入。
+它預設會尋找 Sass 檔案並直接匯入，
+但是在少數狀況下，它會被編譯成 CSS 的 `@import` 規則：
 
-If none of the above conditions are met
-and the extension is `.scss` or `.sass`,
-then the named Sass or SCSS file will be imported.
-If there is no extension,
-Sass will try to find a file with that name and the `.scss` or `.sass` extension
-and import it.
+* 如果檔案的副檔名是 `.css`。
+* 如果檔名用 `http://` 開頭。
+* 如果檔名是一個 `url()。`
+* 如果 `@import` 包含任何 media queries。
 
-For example,
+如果沒上述情況都沒有發生，而且副檔名是 `.scss` 或 `.sass`，
+該名稱的 Sass 或 SCSS 檔案就會被匯入。
+如果沒有註明副檔名，Sass 將會試著找出是該名稱且副檔名為 `.scss` 或 `.sass` 的檔案，並且匯入它。
+
+例如，
 
     @import "foo.scss";
 
-or
+或
 
     @import "foo";
 
-would both import the file `foo.scss`,
-whereas
+兩者都會匯入 `foo.scss` 檔案，
+而
 
     @import "foo.css";
     @import "foo" screen;
     @import "http://foo.com/bar";
     @import url(foo);
 
-would all compile to
+會被編譯成
 
     @import "foo.css";
     @import "foo" screen;
     @import "http://foo.com/bar";
     @import url(foo);
 
-It's also possible to import multiple files in one `@import`. 例如：
+也可以在一個 `@import` 裡匯入多個檔案。例如：
 
     @import "rounded-corners", "text-shadow";
 
-would import both the `rounded-corners` and the `text-shadow` files.
+會匯入 `rounded-corners` 以及 `text-shadow` 兩個檔案。
 
-Imports may contain `#{}` interpolation, but only with certain restrictions.
-It's not possible to dynamically import a Sass file based on a variable;
-interpolation is only for CSS imports.
-As such, it only works with `url()` imports.
+匯入語法可以包含 `#{}` 插補，但是有著特定限制。
+要根據變數來動態匯入一個 Sass 檔案是不可能的；插補只對 CSS 匯入語法有效。
+就此來說，它只能用在 `url()` 語法。
 例如：
 
     $family: unquote("Droid+Sans");
     @import url("http://fonts.googleapis.com/css?family=\#{$family}");
 
-would compile to
+會被編譯成
 
     @import url("http://fonts.googleapis.com/css?family=Droid+Sans");
 
