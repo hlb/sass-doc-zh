@@ -1050,7 +1050,11 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 
     @import url("http://fonts.googleapis.com/css?family=Droid+Sans");
 
-#### Partials {#partials}
+#### 部分(Partials) {#partials}
+
+如果你有一個 SCSS 或 Sass 檔案想要匯入，但是不想編譯成 CSS 檔案，你可以在檔名前面加上底線。
+這會告訴 Sass 不要把它編譯成正常的 CSS 檔案。
+接下來你可以照樣匯入這些檔案，不用加上底線。
 
 If you have a SCSS or Sass file that you want to import
 but don't want to compile to a CSS file,
@@ -1058,11 +1062,16 @@ you can add an underscore to the beginning of the filename.
 This will tell Sass not to compile it to a normal CSS file.
 You can then import these files without using the underscore.
 
+例如，你可能有 `_colors.scss`。
+這樣不會建立 `_color.css` 檔案，然後你可以這樣
+
 For example, you might have `_colors.scss`.
 Then no `_colors.css` file would be created,
 and you can do
 
     @import "colors";
+
+`_colors.scss` 就會被匯入。
 
 and `_colors.scss` would be imported.
 
