@@ -1052,32 +1052,18 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 
 #### 部分(Partials) {#partials}
 
-如果你有一個 SCSS 或 Sass 檔案想要匯入，但是不想編譯成 CSS 檔案，你可以在檔名前面加上底線。
-這會告訴 Sass 不要把它編譯成正常的 CSS 檔案。
-接下來你可以照樣匯入這些檔案，不用加上底線。
+如果你有一個 SCSS 或 Sass 檔案想要匯入，但是不希望它被編譯成一個 CSS 檔案，你可以在檔名前面加上底線。
+這樣會告訴 Sass 不要把它編譯成一般的 CSS 檔案。
+接著你可以照樣匯入這些檔案，不需要加上底線。
 
-If you have a SCSS or Sass file that you want to import
-but don't want to compile to a CSS file,
-you can add an underscore to the beginning of the filename.
-This will tell Sass not to compile it to a normal CSS file.
-You can then import these files without using the underscore.
-
-例如，你可能有 `_colors.scss`。
-這樣不會建立 `_color.css` 檔案，然後你可以這樣
-
-For example, you might have `_colors.scss`.
-Then no `_colors.css` file would be created,
-and you can do
+例如，你也許有個 `_colors.scss`。
+這樣並不會建立 `_color.css`，而且你可以這樣做
 
     @import "colors";
 
-`_colors.scss` 就會被匯入。
+來匯入 `_colors.scss`。
 
-and `_colors.scss` would be imported.
-
-Note that you may not include a partial and a non-partial with the same name in
-the same directory. For example, `_colors.scss` may not exist alongside
-`colors.scss`.
+請注意，你不可以在同個目錄放入 partial 與非 partial 的同名檔案。例如，`_colors.scss` 不行與 `colors.scss` 並存。
 
 #### Nested `@import` {#nested-import}
 
