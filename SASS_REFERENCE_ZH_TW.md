@@ -1579,7 +1579,7 @@ that have complicated SassScript going on.
 
     @debug 10em + 12em;
 
-outputs:
+輸出：
 
     Line 1 DEBUG: 22em
 
