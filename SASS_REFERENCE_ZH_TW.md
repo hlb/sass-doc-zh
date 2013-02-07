@@ -251,19 +251,19 @@ Sass 樣式表跟視圖(views)的運作方式不同。
   預設為 {Sass::Importers::Filesystem}.
 
 {#line_numbers-option} `:line_numbers`
-: 當設定為 true 時會將生成該選擇器定義的行號及檔案在 CSS 編譯時輸出在註解。對除錯非常有用，尤其是使用 import 和 mixin 時。
+: 當設定為 true 時會將生成該選擇符定義的行號及檔案在 CSS 編譯時輸出在註解。對除錯非常有用，尤其是使用 import 和 mixin 時。
   這個選項也被叫做 `:line_comments`.
   當使用 `:compressed` 輸出風格
   或 `:debug_info`/`:trace_selectors` 選項時會自動停用。
 
 {#trace_selectors-option} `:trace_selectors`
-: 當設定為 true 時顯示完整的 import 和 mixin 追蹤在選擇器前。 這可以幫助在瀏覽器中樣式表的 imports 和 mixin 除錯。 
+: 當設定為 true 時顯示完整的 import 和 mixin 追蹤在選擇符前。 這可以幫助在瀏覽器中樣式表的 imports 和 mixin 除錯。
   這個選項可以用 `:line_comments` 選項取代而且被
   `:debug_info` 選項取代。 當使用
   `:compressed` 輸出風格時，將會被自動停用。
 
 {#debug_info-option} `:debug_info`
-: 當設定為 true 時會將生成該選擇器的行號及檔案在 CSS 編譯為瀏覽器可以理解的格式。
+: 當設定為 true 時會將生成該選擇符的行號及檔案在 CSS 編譯為瀏覽器可以理解的格式。
   與 [the FireSass Firebug extension](https://addons.mozilla.org/en-US/firefox/addon/103988) 搭配使用時非常有用於
   呈現 Sass 的檔案及行號。
   當使用 `:compressed` 輸出風格，將會被自動停用。
