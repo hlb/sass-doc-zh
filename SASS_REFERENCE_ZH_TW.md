@@ -1065,48 +1065,41 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 
 請注意，你不可以在同個目錄放入 partial 與非 partial 的同名檔案。例如，`_colors.scss` 不行與 `colors.scss` 並存。
 
-#### Nested `@import` {#nested-import}
+#### 巢狀 `@import` {#nested-import}
 
-Although most of the time it's most useful to just have `@import`s
-at the top level of the document,
-it is possible to include them within CSS rules and `@media` rules.
-Like a base-level `@import`, this includes the contents of the `@import`ed file.
-However, the imported rules will be nested in the same place as the original `@import`.
+雖然大部份的時間，只要在文件最上層有 `@import` 就非常有用了，
+但是你也可以把它們包在 CSS 規則和 `@media` 規則裡。
+就像基層的 `@import` 一樣，這樣會包含被 `@import` 匯入的文件內容。
+然而，被匯入的規則會被嵌入到原本 `@import` 的位置。
 
-For example, if `example.scss` contains
+例如，如果 `example.scss` 包含
 
     .example {
       color: red;
     }
 
-then
+那麼
 
     #main {
       @import "example";
     }
 
-would compile to
+會被編譯成
 
     #main .example {
       color: red;
     }
 
-Directives that are only allowed at the base level of a document,
-like `@mixin` or `@charset`, are not allowed in files that are `@import`ed
-in a nested context.
+指令只被允許放在文件的基層，
+像是 `@mixin` 或 `@charset` 則不被允許出現在被巢狀 `@import` 的文件裡。
 
-It's not possible to nest `@import` within mixins or control directives.
+巢狀 `@import` mixins 或控制指令是不被允許的。
 
 ### `@media` {#media}
 
-`@media` directives in Sass behave just like they do in plain CSS,
-with one extra capability: they can be nested in CSS rules.
-If a `@media` directive appears within a CSS rule,
-it will be bubbled up to the top level of the stylesheet,
-putting all the selectors on the way inside the rule.
-This makes it easy to add media-specific styles
-without having to repeat selectors
-or break the flow of the stylesheet.
+`@media` 指令在 Sass 的運作方式跟一般 CSS 裡一模一樣，只是多了一個額外的功能：他們可以被巢狀放置在 CSS 規則內。
+如果一個 `@media` 指令出現在一個 CSS 規則內，它會被移動到樣式表的最上層，並且把途中遇到的所有選擇符都放到裡面。
+這樣讓添加 media 相關的樣式變得很簡單，不用重複選擇符或是打斷樣式表的連貫性。
 例如：
 
     .sidebar {
@@ -1124,8 +1117,8 @@ or break the flow of the stylesheet.
         .sidebar {
           width: 500px; } }
 
-`@media` queries can also be nested within one another.
-The queries will then be combined using the `and` operator.
+`@media` queries 也可以被巢狀放置在另一個裡面。
+這個 queries 會用 `and` 運算符與另一個合併。
 例如：
 
     @media screen {
