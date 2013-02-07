@@ -397,7 +397,7 @@ Sass 允許 CSS 規則被嵌套在其他規則裡。
 ### 參考父選擇符：`&`
 
 有時候提供其他途徑來使用巢狀語法的父選擇符是非常有幫助的。
-例如，你可能會希望在選擇符被滑鼠停留、或是當 body 元件有特定類別的時候，給予選擇符特定的樣式
+例如，你可能會希望在選擇符被滑鼠停留、或是當 body 元件有特定 class 的時候，給予選擇符特定的樣式
 在這種情況下，你可以用 `&` 字元來明確指出父選擇符應該放在哪裡。
 例如：
 
@@ -483,7 +483,7 @@ Sass 提供了一個捷徑：只要寫一次命名空間，再用巢狀語法包
 ### 佔位選擇符：`%foo`
 
 Sass 支援一種叫做「佔位選擇符」的特殊選擇符。
-它們看起來就像類別與 id 選擇符，只是 `#` 或 `.` 被 `%` 所取代。
+它們看起來就像 class 與 id 選擇符，只是 `#` 或 `.` 被 `%` 所取代。
 它們必須要配合 [`@extend` 指令](#extend) 使用。
 更多資訊請見 [`@extend` 獨享的選擇符](#placeholders).
 
@@ -647,8 +647,8 @@ SassScript 兩種都認得，並且如果一種類型的字串被用在 Sass 文
 
 ### 運算
 
-所有類別都支援等式運算（`==` 和 `!=`）。
-此外，每種類別有自己特別支援的運算功能。
+所有資料型別都支援等式運算（`==` 和 `!=`）。
+此外，每種資料型別有自己特別支援的運算功能。
 
 #### 數字運算
 
@@ -666,7 +666,7 @@ SassScript 支援數字的標準算術運算（`+`、`-`、`*`、`/`、`%`），
 
 數字也支援關係運算子
 （`<`、`>`、`<=`、`>=`），
-而所有類別都支援等式運算子
+而所有資料型別都支援等式運算子
 （`==` 和 `!=`）。
 
 ##### 除法和 `/`
@@ -1155,19 +1155,15 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 
 ### `@extend` {#extend}
 
-There are often cases when designing a page
-when one class should have all the styles of another class,
-as well as its own specific styles.
-The most common way of handling this is to use both the more general class
-and the more specific class in the HTML.
-For example, suppose we have a design for a normal error
-and also for a serious error. We might write our markup like so:
+當設計一個頁面時的常見狀況是，一個 class 應該要具備另一個 class 的所有樣式，並且有它自己的特定樣式。
+最常驗的處理方式是在 HTML 裡同時使用一般性的 class 以及更特定的 class。
+例如，假設我們設計了一個通常錯誤，以及一個嚴重的錯誤。我們也許會像這樣撰寫我們的 HTML 標記：
 
     <div class="error seriousError">
       Oh no! You've been hacked!
     </div>
 
-And our styles like so:
+以及像這樣的樣式：
 
     .error {
       border: 1px #f00;
