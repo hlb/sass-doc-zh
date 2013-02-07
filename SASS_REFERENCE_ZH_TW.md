@@ -295,7 +295,7 @@ Available options are:
 
 ### 語法選擇
 
-Sass 命令列工具會根據文件副檔名判斷你使用的語法，但是有時候未必有檔名這回事。`sass` 命令列程式預設採用縮排語法，但是如果你需要輸入的資料用 SCSS 語法解析，可以傳入 `--scss` 選項。
+Sass 命令列工具會根據文件副檔名判斷你使用的語法，但有時未必有檔名這回事。`sass` 命令列程式預設採用縮排語法，但是如果你需要輸入的資料用 SCSS 語法解析，可以傳入 `--scss` 選項。
 另外，你可以使用 `scss` 命令列程式，它跟 `sass` 程式完全一模一樣，不過預設採用的語法是 SCSS。
 
 ### 編碼
@@ -2086,24 +2086,17 @@ and so that readers of your stylesheets know they are not part of Sass or CSS. F
 User-defined functions also support [variable arguments](#variable_arguments)
 in the same way as mixins.
 
-## Output Style
+## 程式碼匯出樣式 Output Style
 
-Although the default CSS style that Sass outputs is very nice
-and reflects the structure of the document,
-tastes and needs vary and so Sass supports several other styles.
+雖然 Sass 預設匯出的 CSS 已經非常棒，也反應文件的結構，
+但眾人需求不同，所以 Sass 也支援其他不同的程式碼樣式。
 
-Sass allows you to choose between four different output styles
-by setting the [`:style` option](#style-option)
-or using the `--style` command-line flag.
+只要設定 [`:style` 選項](#style-option) 或採用 `--style` 命令列選項，就能讓 Sass 以不同設定匯出。
 
-### `:nested`
+### 巢狀 `:nested`
 
-Nested style is the default Sass style,
-because it reflects the structure of the CSS styles
-and the HTML document they're styling.
-Each property has its own line,
-but the indentation isn't constant.
-Each rule is indented based on how deeply it's nested.
+Sass 預設使用巢狀方式匯出 CSS，因為這可反應了 CSS 樣式及所套用之 HTML 文件的結構。
+每個屬性獨自佔用一行，但縮排幅度則依據其原本巢狀層級的深淺而定，並不一致。
 例如：
 
     #main {
@@ -2117,9 +2110,7 @@ Each rule is indented based on how deeply it's nested.
       font-weight: bold;
       text-decoration: underline; }
 
-Nested style is very useful when looking at large CSS files:
-it allows you to easily grasp the structure of the file
-without actually reading anything.
+巢狀排列在觀看大型 CSS 檔案時相當有用：你不必認真閱讀程式，便可輕鬆理解整個檔案的結構。
 
 ### `:expanded`
 
