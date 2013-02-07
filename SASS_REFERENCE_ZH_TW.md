@@ -3,13 +3,13 @@
 * 目錄
 {:toc}
 
-Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你使用 [變數](#variables_), [巢狀規則](#nested_rules)、
+Sass 是讓 CSS 基礎語法更加強大、優雅的擴充版本。它允許你使用 [變數](#variables_), [巢狀規則(nested rules)](#nested_rules)、
 [混搭(mixins)](#mixins)、[直接匯入(inline import)](#import) 等眾多功能，並且完全相容 CSS 既有語法。Sass 有助於保持大型樣式表的結構嚴謹，同時也讓人能夠快速上手小型樣式表，特別是在搭配 [Compass 函式庫](http://compass-style.org)使用的時候。
 
 ## 特色
 
 * 完全相容 CSS3
-* 變數、巢狀、混搭(mixins)等語法擴充
+* 變數、巢狀、mixins 等語法擴充
 * 許多操控色彩與其他數值的{Sass::Script::Functions 好用函式}
 * 進階功能，像是提供函式庫使用的[控制指令](#control_directives)
 * 符合語法、客制化的輸出
@@ -504,7 +504,7 @@ Sass 支援使用 `/* */` 的標準多行 CSS 註解，以及使用 `//` 的單�
 
 ## SassScript {#sassscript}
 
-除了純 CSS 屬性語法之外，Sass 也支援一個名為 SassScript 的小型擴充語法集合。
+除了一般 CSS 屬性語法之外，Sass 也支援一個名為 SassScript 的小型擴充語法集合。
 SassScript 允許屬性使用變數、算術和額外的函式。
 SassScript 可以用在任何屬性值。
 
@@ -572,7 +572,7 @@ CSS 提供兩種類型的字串：那些有引號的，像是 `"Lucida Grande"` 
 SassScript 兩種都認得，並且如果一種類型的字串被用在 Sass 文件裡，同類型的字串也會被用在 CSS 結果裡。
 
 不過這裡有個例外：
-當使用 [`#{}` 插補](#interpolation_) 時，字串的引號會被拿掉。
+當使用 [`#{}` interpolation](#interpolation_) 時，字串的引號會被拿掉。
 這讓它被用在像是 [mixins](#mixins) 內的選擇符名稱，這類用途時容易一些。
 
 例如：
@@ -612,7 +612,7 @@ SassScript 兩種都認得，並且如果一種類型的字串被用在 Sass 文
 例如，`(1px 2px) (5px 6px)` 也是一個有兩個項目的列表，它包含了列表 `1px 2px` 和列表 `5px 6px`。
 差別在於外層列表是用空白隔開，而前一個是用逗號隔開。
 
-當列表被轉換成純 CSS 的時候，Sass 不會加上任何括號，因為 CSS 並不認得它們。
+當列表被轉換成一般 CSS 的時候，Sass 不會加上任何括號，因為 CSS 並不認得它們。
 這代表說，當 `(1px 2px) (5px 6px)` 與 `1px 2px 5px 6px` 被轉換成 CSS 的時候，看起來會是一樣的。
 然而，它們在 Sass 中是不同的：
 第一個是包含兩個列表的列表，
@@ -684,7 +684,7 @@ CSS 允許 `/` 出現在屬性值裡，作為分隔數字的一種方法。
       height: 250px;
       margin-left: 9px; }
 
-如果你只是想要在純 CSS 的 `/` 中使用變數，
+如果你只是想要在一般 CSS 的 `/` 中使用變數，
 你可以用 `#{}` 插入它們。
 例如：
 
@@ -910,7 +910,7 @@ Sass 函式也可以使用明確的關鍵字參數來呼叫。
 
 也能夠用 `#{}` 來把 SassScript 放到屬性值裡。
 在大多數情況下，這沒有比使用變數來得高明，
-但是使用 `#{}` 意味著它附近任何的運算符號都會被視為純 CSS。
+但是使用 `#{}` 意味著它附近任何的運算符號都會被視為一般 CSS。
 例如：
 
     p {
@@ -965,100 +965,86 @@ Sass 函式也可以使用明確的關鍵字參數來呼叫。
 
 Sass 支援所有 CSS3 `@` 規則，以及一些額外的 Sass 專屬的規則，被稱為「指令(directives)」。
 這些規則在 Sass 裡有不同的效用，詳述如下。
-也可參考[控制指令(control directives)](#control_directives)與[混搭指令(mixin directives)](#mixins).
+也可參考[控制指令(control directives)](#control_directives)與 [mixin 指令(mixin directives)](#mixins).
 
 ### `@import` {#import}
 
-Sass extends the CSS `@import` rule
-to allow it to import SCSS and Sass files.
-All imported SCSS and Sass files will be merged together
-into a single CSS output file.
-In addition, any variables or [mixins](#mixins)
-defined in imported files can be used in the main file.
+Sass 擴充了 CSS 的 `@import` 規則，讓它能夠匯入 SCSS 與 Sass 檔案。
+所有匯入的 SCSS 與 Sass 檔案會被結合起來變成單個 CSS 輸出檔案。
 
-Sass looks for other Sass files in the current directory,
-and the Sass file directory under Rack, Rails, or Merb.
-Additional search directories may be specified
-using the [`:load_paths`](#load_paths-option) option,
-or the `--load-path` option on the command line.
+此外，任何匯入檔案中定義的變數或 [mixins](#mixins) 都可以被用在主檔案裡。
 
-`@import` takes a filename to import.
-By default, it looks for a Sass file to import directly,
-but there are a few circumstances under which it will compile to a CSS `@import` rule:
+Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 Merb 程式則是在 Sass 檔案目錄。
+額外的搜尋目錄可以使用 [`:load_paths`](#load_paths-option) 選項指定，或是使用命令列的 `--load-path` 選項。
 
-* If the file's extension is `.css`.
-* If the filename begins with `http://`.
-* If the filename is a `url()`.
-* If the `@import` has any media queries.
+`@import` 用檔名進行匯入。
+它預設會尋找 Sass 檔案並直接匯入，
+但是在少數狀況下，它會被編譯成 CSS 的 `@import` 規則：
 
-If none of the above conditions are met
-and the extension is `.scss` or `.sass`,
-then the named Sass or SCSS file will be imported.
-If there is no extension,
-Sass will try to find a file with that name and the `.scss` or `.sass` extension
-and import it.
+* 如果檔案的副檔名是 `.css`。
+* 如果檔名用 `http://` 開頭。
+* 如果檔名是一個 `url()。`
+* 如果 `@import` 包含任何 media queries。
 
-For example,
+如果沒上述情況都沒有發生，而且副檔名是 `.scss` 或 `.sass`，
+該名稱的 Sass 或 SCSS 檔案就會被匯入。
+如果沒有註明副檔名，Sass 將會試著找出是該名稱且副檔名為 `.scss` 或 `.sass` 的檔案，並且匯入它。
+
+例如，
 
     @import "foo.scss";
 
-or
+或
 
     @import "foo";
 
-would both import the file `foo.scss`,
-whereas
+兩者都會匯入 `foo.scss` 檔案，
+而
 
     @import "foo.css";
     @import "foo" screen;
     @import "http://foo.com/bar";
     @import url(foo);
 
-would all compile to
+會被編譯成
 
     @import "foo.css";
     @import "foo" screen;
     @import "http://foo.com/bar";
     @import url(foo);
 
-It's also possible to import multiple files in one `@import`. 例如：
+也可以在一個 `@import` 裡匯入多個檔案。例如：
 
     @import "rounded-corners", "text-shadow";
 
-would import both the `rounded-corners` and the `text-shadow` files.
+會匯入 `rounded-corners` 以及 `text-shadow` 兩個檔案。
 
-Imports may contain `#{}` interpolation, but only with certain restrictions.
-It's not possible to dynamically import a Sass file based on a variable;
-interpolation is only for CSS imports.
-As such, it only works with `url()` imports.
+匯入語法可以包含 `#{}` 插補，但是有著特定限制。
+要根據變數來動態匯入一個 Sass 檔案是不可能的；插補只對 CSS 匯入語法有效。
+就此來說，它只能用在 `url()` 語法。
 例如：
 
     $family: unquote("Droid+Sans");
     @import url("http://fonts.googleapis.com/css?family=\#{$family}");
 
-would compile to
+會被編譯成
 
     @import url("http://fonts.googleapis.com/css?family=Droid+Sans");
 
-#### Partials {#partials}
+#### 部分(Partials) {#partials}
 
-If you have a SCSS or Sass file that you want to import
-but don't want to compile to a CSS file,
-you can add an underscore to the beginning of the filename.
-This will tell Sass not to compile it to a normal CSS file.
-You can then import these files without using the underscore.
+如果你有一個 SCSS 或 Sass 檔案想要匯入，但是不希望它被編譯成一個 CSS 檔案，你可以在檔名前面加上底線。
+這樣會告訴 Sass 不要把它編譯成一般的 CSS 檔案。
+接著你可以照樣匯入這些檔案，不需要加上底線。
 
-For example, you might have `_colors.scss`.
-Then no `_colors.css` file would be created,
-and you can do
+例如，你也許有個 `_colors.scss`。
+這樣並不會建立 `_color.css`，而且你可以這樣做
 
     @import "colors";
 
-and `_colors.scss` would be imported.
+來匯入 `_colors.scss`。
 
-Note that you may not include a partial and a non-partial with the same name in
-the same directory. For example, `_colors.scss` may not exist alongside
-`colors.scss`.
+請注意，你不可以在同個目錄放入 partial 與非 partial 的同名檔案。例如，`_colors.scss` 不行與 `colors.scss` 並存。
 
 #### Nested `@import` {#nested-import}
 
@@ -1569,7 +1555,7 @@ that have complicated SassScript going on.
 
     @debug 10em + 12em;
 
-outputs:
+輸出：
 
     Line 1 DEBUG: 22em
 
