@@ -1135,9 +1135,7 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
       .sidebar {
         width: 500px; } }
 
-Finally, `@media` queries can contain SassScript expressions (including
-variables, functions, and operators) in place of the feature names and feature
-values. 例如：
+最後，`@media` queries 可以用 SassScript 表達式（包含變數、函式和算符）替換掉特徵名稱(feature names)與特徵值(feature values)。例如：
 
     $media: screen;
     $feature: -webkit-min-device-pixel-ratio;
