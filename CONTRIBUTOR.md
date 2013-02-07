@@ -1,1 +1,2 @@
 - [audreyt](https://github.com/audreyt) for the Chinese name of "Syntactically Awesome StyleSheets".
+- [bobchao](https://github.com/bobchao)
