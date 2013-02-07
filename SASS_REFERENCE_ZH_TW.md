@@ -114,9 +114,9 @@ Sass 樣式表跟視圖(views)的運作方式不同。
 
     Merb::Plugin.config[:sass][:style] = :compact
 
-... 或者傳入一個選項雜湊到 {Sass::Engine#initialize}.
+... 或者傳入一個選項雜湊到 {Sass::Engine#initialize}。
 
-所有對應的選項都可以透過旗標在 `sass` 和 `scss` 命令列執行.
+所有對應的選項都可以透過設定旗標在 `sass` 和 `scss` 命令列執行。
 
 可用的選項有：
 
@@ -126,30 +126,30 @@ Sass 樣式表跟視圖(views)的運作方式不同。
 
 {#syntax-option} `:syntax`
 : 輸入檔案的語法， `:sass` 用於縮排式語法
-  以及 `:scss` 用於 CSS-extension 式語法.
-  這在建構你自己的 {Sass::Engine} 實例時非常有用;
-  他會自動設定正確當你使用 {Sass::Plugin}.
-  預設值是 `:sass`.
+  以及 `:scss` 用於 CSS-extension 式語法。
+  這在建構你自己的 {Sass::Engine} 實例時非常有用；
+  當你使用 {Sass::Plugin} 他會自動正確設定。
+  預設值是 `:sass`。
 
 {#property_syntax-option} `:property_syntax`
 : 強制縮排式語法的文件使用一種描述屬性的語法。
   如果沒有使用正確的語法，將會拋出錯誤。
-  `:new` 強制屬性後面使用冒號或等於。
+  `:new` - 強制屬性後面使用冒號或等於。
   例如： `color: #0f3`
-  或 `width: $main_width`.
-  `:old` 強制屬性前面使用冒號。
+  或 `width: $main_width`。
+  `:old` - 強制屬性前面使用冒號。
   例如： `:color #0f3`
-  或 `:width $main_width`.
+  或 `:width $main_width`。
   在預設情況，兩者都是正確的。
-  這在 SCSS 文件中並不會生效。
+  但這在 SCSS 文件中並不會生效。
 
 {#cache-option} `:cache`
-: 編譯過的 Sass 文件是否被快取，能夠提高重新編譯速度。 預設為 true.
+: 編譯過的 Sass 文件是否被快取，能夠提高重新編譯速度。 預設為 true。
 
 {#read_cache-option} `:read_cache`
-: 如果被設定而且 `:cache` 沒有設定,
-  只會讀取存在的 Sass 快取，
-  並且不寫入如果檔案不存在。
+: 如果被設定而且 `:cache` 沒有設定，
+  那麼只會讀取存在的 Sass 快取，
+  如果檔案不存在則不寫入。
 
 {#cache_store-option} `:cache_store`
 : 如果這是設定為 {Sass::CacheStores::Base} 子類的實例，
@@ -159,25 +159,24 @@ Sass 樣式表跟視圖(views)的運作方式不同。
   使用 [`:cache_location` 選項](#cache_location-option) 初始化。
 
 {#never_update-option} `:never_update`
-: CSS 檔案永遠不更新，
-  即使樣板檔案被更改。
+: 即使樣板檔案被更改，CSS 檔案也不更新。
   設定這個選項為 true 可能會獲得少量的效能提升。
-  這個選項總是預設為 false.
-  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
+  這個選項總是預設為 false。
+  只有使用 Rack, Ruby 在 Rails 上，或 Merb 才有具有意義。
 
 {#always_update-option} `:always_update`
 : 每次 controller 被訪問時 CSS 檔案總是會更新，
   而不是只在樣板檔案被修改的時候。
-  預設為 false.
-  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
+  預設為 false。
+  只有使用 Rack, Ruby 在 Rails 上，或 Merb 才有具有意義。
 
 {#always_check-option} `:always_check`
 : 每次 controller 被訪問時總是檢查 Sass 樣板檔案，
-  而不是只在伺服器起動時。
+  而不是只有在伺服器起動時。
   如果 Sass 樣板檔案被更新，
   它將會重新編譯並且覆蓋對應的 CSS 檔案。
-  預設是 false 在 production 模式，在其他情況則為 true.
-  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
+  預設是 false 在 production 模式，在其他情況則為 true。
+  只有使用 Rack, Ruby 在 Rails 上，或 Merb 才有具有意義。
 
 {#poll-option} `:poll`
 : 當設定為 true 時， 總是使用 {Sass::Plugin::Compiler#watch} 作為後端
@@ -185,22 +184,22 @@ Sass 樣式表跟視圖(views)的運作方式不同。
 
 {#full_exception-option} `:full_exception`
 : 不論是否有錯誤在 Sass 原始碼
-  都應讓 Sass 提供詳細的說明
+  都應該讓 Sass 提供詳細的說明
   在產生的 CSS 檔案中。
-  如果設定為 true 那麼錯誤將會同時顯示
+  如果設定為 true 那麼錯誤也會同時顯示
   行號與原始碼的註解在 CSS 檔案
   以及頁面的最上方（在支援的瀏覽器中）
   另外，一個例外將會在 Ruby 中被呼叫。
-  預設為 false 在 production 模式，在其他情況則為 true.
-  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
+  預設為 false 在 production 模式，在其他情況則為 true。
+  只有使用 Rack, Ruby 在 Rails 上，或 Merb 才有具有意義。
 
 {#template_location-option} `:template_location`
-: Sass 樣板檔案的根目錄路徑在你的應用程式中。
-  如果是一個砸湊，那麼 `:css_location` 會被忽略，並且這個選項將會指定輸入與輸出的資料夾。
+: 在你的應用程式中 Sass 樣板檔案的根目錄路徑。
+  如果是一個雜湊，那麼 `:css_location` 會被忽略，並且這個選項將會指定輸入與輸出的資料夾。
   也可以給予兩個元素的列表，而非雜湊。
   預設是 `css_location + "/sass"`.
-  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
-  註記，如果有多個樣板位置被指定，它們都會被放入匯入路徑，讓你可以在他們之間匯入。
+  只有使用 Rack, Ruby 在 Rails 上，或 Merb 才有具有意義。
+  註記，如果有多個樣板位置被指定，它們都會被放入匯入路徑，讓你可以在他們之間進行匯入。
   **註記，由於可以採用多種可能的格式，
   這個選項應該直接設定而非訪問或修改。
   使用 {Sass::Plugin::Configuration#template_location_array Sass::Plugin#template_location_array},
@@ -209,27 +208,27 @@ Sass 樣式表跟視圖(views)的運作方式不同。
 
 {#css_location-option} `:css_location`
 : CSS 檔案寫入的路徑。
-  這個選項將會被忽略，當 `:template_location` 是一個雜湊。
-  預設為 `"./public/stylesheets"`.
-  只有 Rack, Ruby 在 Rails, 或 Merb 才有具有意義.
+  當 `:template_location` 是一個雜湊，那麼這個選項將會被忽略。
+  預設為 `"./public/stylesheets"`。
+  只有使用 Rack, Ruby 在 Rails 上，或 Merb 才有具有意義。
 
 {#cache_location-option} `:cache_location`
 : 快取 `sassc` 檔案寫入的路徑。
-  預設為 `"./tmp/sass-cache"` 在 Rails and Merb,
+  預設為 `"./tmp/sass-cache"` 在 Rails 和 Merb 中，
   或者 `"./.sass-cache"` 其他情況。
   如果 [`:cache_store` 選項](#cache_location-option) 被設定，
   這個選項將會被忽略。
 
 {#unix_newlines-option} `:unix_newlines`
-: 如果為 true 則使用 Unix-style 換行方式寫入檔案.
+: 如果為 true 則使用 Unix-style 換行方式寫入檔案。
   只有在 Windows 時以及 Sass 寫入檔案時有意義
-  (在 Rack, Rails, 或 Merb, 當直接使用 {Sass::Plugin}
+  (當直接使用 {Sass::Plugin} 在 Rack, Rails 和 Merb
   或使用命令列執行)
 
 {#filename-option} `:filename`
 : 正在被渲染的檔案名稱。
   這只用於錯誤報告，
-  當使用 Rack, Rails, 或 Merb 時會被自動設定。
+  當使用 Rack, Rails 或 Merb 時會被自動設定。
 
 {#line-option} `:line`
 : Sass 樣板的第一行行號。
@@ -239,13 +238,13 @@ Sass 樣式表跟視圖(views)的運作方式不同。
 {#load_paths-option} `:load_paths`
 : 一個陣列、檔案系統的路徑或匯入器（應要搜尋 Sass 樣板）用於指定 [`@import`](#import) 的目標。
   可能是字串， `Pathname` 物件，或是 {Sass::Importers::Base} 的子類。
-  預設是目前工作的資料夾，在 Rack, Rails, 或 Merb,
+  預設是目前工作的資料夾，在 Rack, Rails 或 Merb，
   則是 `:template_location`。
-  讀取路徑也尋找 {Sass.load_paths}
+  讀取路徑也會尋找 {Sass.load_paths}
   和 `SASS_PATH` 環境變數設定的路徑。
 
 {#filesystem_importer-option} `:filesystem_importer`
-: 一個 {Sass::Importers::Base} 子類用於處理純文字的讀取路徑。
+: 一個 {Sass::Importers::Base} 子類，用於處理純文字的讀取路徑。
   這必須從檔案系統匯入檔案。
   它必須是個類別物件繼承自 {Sass::Importers::Base}
   並有一個建構子接受一個字串參數 (讀取路徑).
