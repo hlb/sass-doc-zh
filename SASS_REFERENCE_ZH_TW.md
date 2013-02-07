@@ -1157,7 +1157,7 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 
 當設計一個頁面時的常見狀況是，一個 class 應該要具備另一個 class 的所有樣式，並且有它自己的特定樣式。
 最常驗的處理方式是在 HTML 裡同時使用一般性的 class 以及更特定的 class。
-例如，假設我們設計了一個通常錯誤，以及一個嚴重的錯誤。我們也許會像這樣撰寫我們的 HTML 標記：
+例如，假設我們設計了一個通常錯誤，以及一個嚴重的錯誤。我們也許會像這樣撰寫我們的 HTML markup：
 
     <div class="error seriousError">
       Oh no! You've been hacked!
@@ -1173,13 +1173,10 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
       border-width: 3px;
     }
 
-Unfortunately, this means that we have to always remember
-to use `.error` with `.seriousError`.
-This is a maintenance burden, leads to tricky bugs,
-and can bring non-semantic style concerns into the markup.
+不幸的是，這意味著我們必須總是記得將 `.seriousError` 與 `.error` 一起使用。
+這是一個維護的負擔，會導致棘手的錯誤，並且帶來非語意化(non-semantic)風格的顧慮。
 
-The `@extend` directive avoids these problems
-by telling Sass that one selector should inherit the styles of another selector.
+`@extend` 控制指令避免了這些問題，它會告知 Sass 一個選擇符應該繼承另一個選擇符的樣式。
 例如：
 
     .error {
@@ -1191,26 +1188,27 @@ by telling Sass that one selector should inherit the styles of another selector.
       border-width: 3px;
     }
 
+這表示除了 `.seriousError` 特別指定的樣式之外，定義在 `.error` 的所有樣式也應該被套用到 `.seriousError`。
+實際上，任何有 `.error` class 的選擇符都會有 `.seriousError` class。
+
 This means that all styles defined for `.error`
 are also applied to `.seriousError`,
 in addition to the styles specific to `.seriousError`.
 In effect, everything with class `.seriousError` also has class `.error`.
 
-Other rules that use `.error` will work for `.seriousError` as well.
-For example, if we have special styles for errors caused by hackers:
+其他用到 `.error` 的規則也能對 `.seriousError` 運作。
+例如，如果我們有特殊的樣式來表示駭客造成的錯誤：
 
     .error.intrusion {
       background-image: url("/image/hacked.png");
     }
 
-Then `<div class="seriousError intrusion">`
-will have the `hacked.png` background image as well.
+如此一來 `<div class="seriousError intrusion">` 也會有 `hacked.png` 背景圖片。
 
-#### How it Works
+#### 如何運作
 
-`@extend` works by inserting the extending selector (e.g. `.seriousError`)
-anywhere in the stylesheet that the extended selector (.e.g `.error`) appears.
-Thus the example above:
+`@extend` 的運作方式是在樣式表裡出現被延伸的選擇符（例如 `.error`）的任何位置插入延伸的選擇符（例如 `.seriousError`）。
+所以下面這個範例：
 
     .error {
       border: 1px #f00;
@@ -1236,24 +1234,21 @@ Thus the example above:
     .seriousError {
       border-width: 3px; }
 
-When merging selectors, `@extend` is smart enough
-to avoid unnecessary duplication,
-so something like `.seriousError.seriousError` gets translated to `.seriousError`.
-In addition, it won't produce selectors that can't match anything, like `#main#footer`.
+在合併選擇符的時候，`@extend` 有足夠的智慧來避免不必要的重複，
+所以像是 `.seriousError.seriousError` 會被翻譯成 `.seriousError`。
+此外，他不會產生無法批配任何東西的選擇符，像是 `#main#footer`。
 
-#### Extending Complex Selectors
+#### 延伸複雜的選擇符
 
-Class selectors aren't the only things that can be extended.
-It's possible to extend any selector involving only a single element,
-such as `.special.cool`, `a:hover`, or `a.user[href^="http://"]`.
+類別選擇符不是唯一可以被延伸的東西。
+任何只有單獨元素的選擇符都可以被延伸，像是 `.special.cool`、`a:hover` 或 `a.user[href^="http://"]`。
 例如：
 
     .hoverlink {
       @extend a:hover;
     }
 
-Just like with classes, this means that all styles defined for `a:hover`
-are also applied to `.hoverlink`.
+如同類別，這表示定義在 `a:hover` 的所有樣式也會套用到 `.hoverlink`。
 例如：
 
     .hoverlink {
@@ -1268,9 +1263,9 @@ are also applied to `.hoverlink`.
     a:hover, .hoverlink {
       text-decoration: underline; }
 
-Just like with `.error.intrusion` above,
-any rule that uses `a:hover` will also work for `.hoverlink`,
-even if they have other selectors as well.
+如同上述的 `.error.intrusion`，
+所有用到 `a:hover` 的規則也能對 `.hoverlink` 運作，
+即使它們也有其他選擇符。
 例如：
 
     .hoverlink {
