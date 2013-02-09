@@ -1261,10 +1261,10 @@ In effect, everything with class `.seriousError` also has class `.error`.
     .comment a.user:hover, .comment .user.hoverlink {
       font-weight: bold; }
 
-#### Multiple Extends
+#### 多重延伸
 
-A single selector can extend more than one selector.
-This means that it inherits the styles of all the extended selectors.
+單一選擇符可以延伸多個選擇符。
+這樣代表它繼承了所有被延伸選擇符的樣式。
 例如：
 
     .error {
