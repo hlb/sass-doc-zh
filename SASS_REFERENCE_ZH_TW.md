@@ -970,7 +970,7 @@ Sass 支援所有 CSS3 `@` 規則，以及一些額外的 Sass 專屬的規則�
 ### `@import` {#import}
 
 Sass 擴充了 CSS 的 `@import` 規則，讓它能夠匯入 SCSS 與 Sass 檔案。
-所有匯入的 SCSS 與 Sass 檔案會被結合起來變成單個 CSS 輸出檔案。
+所有匯入的 SCSS 與 Sass 檔案會被彙整起來變成單個 CSS 輸出檔案。
 
 此外，任何匯入檔案中定義的變數或 [mixins](#mixins) 都可以被用在主檔案裡。
 
@@ -1170,14 +1170,7 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
     }
 
 這表示除了 `.seriousError` 特別指定的樣式之外，定義在 `.error` 的所有樣式也應該被套用到 `.seriousError`。
-實際上，任何有 `.error` class 的選擇符都會有 `.seriousError` class。
-
-This means that all styles defined for `.error`
-are also applied to `.seriousError`,
-in addition to the styles specific to `.seriousError`.
-In effect, everything with class `.seriousError` also has class `.error`.
-
-其他用到 `.error` 的規則也能對 `.seriousError` 運作。
+實際上，任何有 class `.seriousError` 的東西都會有 class `.error` 的效用。
 例如，如果我們有特殊的樣式來表示駭客造成的錯誤：
 
     .error.intrusion {
@@ -1294,20 +1287,16 @@ In effect, everything with class `.seriousError` also has class `.error`.
     .seriousError {
       border-width: 3px; }
 
-In effect, everything with class `.seriousError`
-also has class `.error` *and* class `.attention`.
-Thus, the styles defined later in the document take precedence:
-`.seriousError` has background color `#ff0` rather than `#fdd`,
-since `.attention` is defined later than `.error`.
+實際上，任何有 class `.seriousError` 的東西都會有 class `.error` *與* `.attention` 的效用。
+因此，定義在文件比較後面的樣式優先權較高：
+既然 `.attention` 在 `.error` 之後被定義，`.seriousError` 的背景色會是 `#ff0` 而非 `#fdd`。
 
-Multiple extends can also be written using a comma-separated list of selectors.
-For example, `@extend .error, .attention`
-is the same as `@extend .error; @extend.attention`.
+多重延伸也可以寫成用逗號隔開的選擇符列表。
+例如，`@extend .error, .attention` 跟 `@extend .error; @extend.attention` 是相同的。
 
-#### Chaining Extends
+#### 連鎖延伸
 
-It's possible for one selector to extend another selector
-that in turn extends a third.
+選擇符是可以一而再、再而三地不斷延伸的。
 例如：
 
     .error {
@@ -1327,10 +1316,8 @@ that in turn extends a third.
       right: 10%;
     }
 
-Now everything with class `.seriousError` also has class `.error`,
-and everything with class `.criticalError` has class `.seriousError`
-*and* class `.error`.
-It's compiled to:
+現在任何有 `.seriousError` class 的東西也會有 `.error` class，任何有 `.criticalError` class 的東西也會有 `.seriosError` *以及* `.error` class。
+它會被編譯成：
 
     .error, .seriousError, .criticalError {
       border: 1px #f00;
@@ -1346,10 +1333,10 @@ It's compiled to:
       left: 10%;
       right: 10%; }
 
-#### Selector Sequences
+#### 選擇符序列 Selector Sequences
 
-Selector sequences, such as `.foo .bar` or `.foo + .bar`, currently can't be extended.
-However, it is possible for nested selectors themselves to use `@extend`.
+選擇符序列，像是 `.foo .bar` 或 `.foo + .bar`，目前是不能被延伸的。
+然而，巢狀選擇符自己是可以用 `@extend` 的。
 例如：
 
     #fake-links .link {
@@ -1363,17 +1350,17 @@ However, it is possible for nested selectors themselves to use `@extend`.
       }
     }
 
-is compiled to
+被編譯成
 
     a, #fake-links .link {
       color: blue; }
       a:hover, #fake-links .link:hover {
         text-decoration: underline; }
 
-##### Merging Selector Sequences
+##### 彙整 Merging Selector Sequences
 
-Sometimes a selector sequence extends another selector that appears in another sequence.
-In this case, the two sequences need to be merged.
+有時候，一個選擇符序列會延伸在另一個序列中的選擇符。
+在這種狀況下，兩個序列需要被彙整起來。
 例如：
 
     #admin .tabbar a {
@@ -1383,16 +1370,15 @@ In this case, the two sequences need to be merged.
       @extend a;
     }
 
-While it would technically be possible
-to generate all selectors that could possibly match either sequence,
-this would make the stylesheet far too large.
-The simple example above, for instance, would require ten selectors.
-Instead, Sass generates only selectors that are likely to be useful.
+雖然產生出可以符合任一序列的所有選擇符，在技術面上是可行的，
+但這會讓樣式表過於龐大。
+例如上面這個簡單的範例，就會需要 10 個選擇符。
+因此，Sass 只會產生出可能有用的選擇符。
 
-When the two sequences being merged have no selectors in common,
-then two new selectors are generated:
-one with the first sequence before the second,
-and one with the second sequence before the first.
+當兩個被彙整的序列沒有相同的選擇符時，
+兩個新的選擇符會被產生：
+一個是第一序列在第二序列之前，
+另一個是第二序列在第一序列之前。
 例如：
 
     #admin .tabbar a {
@@ -1409,11 +1395,11 @@ and one with the second sequence before the first.
     #demo .overview #admin .tabbar .fakelink {
       font-weight: bold; }
 
-If the two sequences do share some selectors,
-then those selectors will be merged together
-and only the differences (if any still exist) will alternate.
-In this example, both sequences contain the id `#admin`,
-so the resulting selectors will merge those two ids:
+如果兩個序列有共享一些選擇符，
+這些選擇符就會被彙整起來，
+只有差異之處（如果有的話）會輪替。
+在這個例子，兩個序列都包含 id `#admin`，
+所以產出的選擇符會整合這兩個 id：
 
     #admin .tabbar a {
       font-weight: bold;
@@ -1422,7 +1408,7 @@ so the resulting selectors will merge those two ids:
       @extend a;
     }
 
-This 被編譯成：
+並被編譯成：
 
     #admin .tabbar a,
     #admin .tabbar .overview .fakelink,
