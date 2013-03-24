@@ -1415,14 +1415,13 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
     #admin .overview .tabbar .fakelink {
       font-weight: bold; }
 
-#### `@extend`-Only Selectors {#placeholders}
+#### 只用來 `@extend` 的選擇符 {#placeholders}
 
-Sometimes you'll write styles for a class
-that you only ever want to `@extend`,
-and never want to use directly in your HTML.
-This is especially true when writing a Sass library,
-where you may provide styles for users to `@extend` if they need
-and ignore if they don't.
+有時候你撰寫 class 樣式的時候，只希望用來 `@extend`，
+而從不想將它直接用在你的 HTML 裡面。
+這在撰寫 Sass 函式庫時尤其是如此，
+因為你可以提供樣式給用戶，如果他們需要就 `@extend`，
+不需要時則可以忽略。
 
 If you use normal classes for this, you end up creating a lot of extra CSS
 when the stylesheets are generated, and run the risk of colliding with other classes
