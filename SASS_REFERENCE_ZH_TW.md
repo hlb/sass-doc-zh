@@ -226,7 +226,7 @@ Sass 樣式表跟視圖(views)的運作方式不同。
   或使用命令列執行)
 
 {#filename-option} `:filename`
-: 正在被渲染的檔案名稱。
+: 正在被輸出的檔案名稱。
   這只用於錯誤報告，
   當使用 Rack, Rails 或 Merb 時會被自動設定。
 
@@ -1425,10 +1425,11 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 如果你用正常的 class 作這件事，你最終會在樣式表生成時，建立出許多額外的 CSS，而且得冒著與 HTML 裡使用到的其他 class 相衝突的風險。
 這就是為什麼 Sass 支援「佔位選擇符(placeholder selectors)」（像是 `%foo`）。
 
-Placeholder selectors look like class and id selectors,
-except the `#` or `.` is replaced by `%`.
-They can be used anywhere a class or id could,
-and on their own they prevent rulesets from being rendered to CSS.
+佔位選擇符看起來像 class 與 id 選擇符，
+除了 `#` 或 `.` 被 `%` 取代。
+它們可以被用在任何 class 或 id 能用的地方，
+而且會避免自己的規則被輸出到 CSS。
+
 例如：
 
     // This ruleset won't be rendered on its own.
@@ -1438,8 +1439,8 @@ and on their own they prevent rulesets from being rendered to CSS.
       font-size: 2em;
     }
 
-However, placeholder selectors can be extended, just like classes and ids.
-The extended selectors will be generated, but the base placeholder selector will not.
+然而，佔位選擇符可以被 extend，就像 class 與 id 一樣。
+被 extend 的選擇符會被生成，但是基礎的佔位選擇符則不會。
 例如：
 
     .notice {
