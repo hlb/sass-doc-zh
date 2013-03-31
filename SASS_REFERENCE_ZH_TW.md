@@ -1422,10 +1422,8 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 因為你可以提供樣式給用戶，如果他們需要就 `@extend`，
 不需要時則可以忽略。
 
-If you use normal classes for this, you end up creating a lot of extra CSS
-when the stylesheets are generated, and run the risk of colliding with other classes
-that are being used in the HTML.
-That's why Sass supports "placeholder selectors" (for example, `%foo`).
+如果你用正常的 class 作這件事，你最終會在樣式表生成時，建立出許多額外的 CSS，而且得冒著與 HTML 裡使用到的其他 class 相衝突的風險。
+這就是為什麼 Sass 支援「佔位選擇符(placeholder selectors)」（像是 `%foo`）。
 
 Placeholder selectors look like class and id selectors,
 except the `#` or `.` is replaced by `%`.
