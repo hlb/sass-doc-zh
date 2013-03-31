@@ -134,7 +134,7 @@ Sass 樣式表跟視圖(views)的運作方式不同。
 {#property_syntax-option} `:property_syntax`
 : 強制縮排式語法的文件使用一種描述屬性的語法。
   如果沒有使用正確的語法，將會拋出錯誤。
-  `:new` - 強制屬性後面使用冒號或等於。
+  `:new` - 強制屬性後面使用冒號。
   例如： `color: #0f3`
   或 `width: $main_width`。
   `:old` - 強制屬性前面使用冒號。
@@ -281,8 +281,7 @@ Sass 命令列工具會根據文件副檔名判斷你使用的語法，但有時
 
 ### 編碼
 
-When running on Ruby 1.9 and later, Sass is aware of the character encoding of documents
-and will handle them the same way that CSS would.
+When running on Ruby 1.9 and later, Sass is aware of the character encoding of documents.
 By default, Sass assumes that all stylesheets are encoded
 using whatever coding system your operating system defaults to.
 For many users this will be `UTF-8`, the de facto standard for the web.
@@ -1025,7 +1024,7 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 例如：
 
     $family: unquote("Droid+Sans");
-    @import url("http://fonts.googleapis.com/css?family=\#{$family}");
+    @import url("http://fonts.googleapis.com/css?family=#{$family}");
 
 會被編譯成
 
