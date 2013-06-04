@@ -226,7 +226,7 @@ Sass 樣式表跟視圖(views)的運作方式不同。
   或使用命令列執行)
 
 {#filename-option} `:filename`
-: 正在被輸出的檔案名稱。
+: 正在被渲染的檔案名稱。
   這只用於錯誤報告，
   當使用 Rack, Rails 或 Merb 時會被自動設定。
 
@@ -472,7 +472,7 @@ Sass 支援一種叫做「佔位選擇符」的特殊選擇符。
 ## 註解：`/* */` 與 `//` {#comments}
 
 Sass 支援使用 `/* */` 的標準多行 CSS 註解，以及使用 `//` 的單行註解。
-多行註解會在 CSS 輸出裡盡可能地保留，單行註解則會被移除。
+多行註解會在 CSS 輸出裡盡可能地保留，單行注解則會被移除。
 例如：
 
     /* This comment is
@@ -1422,11 +1422,11 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
 因為你可以提供樣式給用戶，如果他們需要就 `@extend`，
 不需要時則可以忽略。
 
-如果你用正常的 class 作這件事，你最終會在樣式表生成時，建立出許多額外的 CSS，而且得冒著與 HTML 裡使用到的其他 class 相衝突的風險。
-這就是為什麼 Sass 支援「佔位選擇符(placeholder selectors)」（像是 `%foo`）。
+如果你用一般的 class 來完成，當樣式表生成時，你最終會創造出許多額外的 CSS，並且得冒著與 HTML 裡正在使用的其他 class 相撞的風險。
+這就是為什麼 Sass 支援「佔位選擇符(placeholder selectors)」（例如 `%foo`）。
 
 佔位選擇符看起來像 class 與 id 選擇符，
-除了 `#` 或 `.` 被 `%` 取代。
+只是 `#` 或 `.` 被 `%` 取代。
 它們可以被用在任何 class 或 id 能用的地方，
 而且會避免自己的規則被輸出到 CSS。
 
@@ -1454,32 +1454,27 @@ Sass 會在當下目錄裡尋找其他 Sass 檔案，如果是 Rack、Rails 或 
       font-weight: bold;
       font-size: 2em; }
 
-#### The `!optional` Flag
+#### `!optional` 旗標
 
-Normally when you extend a selector, it's an error if that `@extend` doesn't
-work. For example, if you write `a.important {@extend .notice}`, it's an error
-if there are no selectors that contain `.notice`. It's also an error if the only
-selector containing `.notice` is `h1.notice`, since `h1` conflicts with `a` and
-so no new selector would be generated.
+通常，當你繼承一個選擇符，如果 `@extend` 不起作用，這是一個錯誤。
+例如，如果你寫了 `a.important {@extend .notice}`，卻沒有任何選擇符包含 `.notice`，就是一個錯誤。
 
-Sometimes, though, you want to allow an `@extend` not to produce any new
-selectors. To do so, just add the `!optional` flag after the selector. For
-example:
+如果唯一包含 `.notice` 的選擇符是 `h1.notice`，既然 `h1` 與 `a` 衝突，這也會是一個錯誤，而且不會有新的選擇符被產生。
+
+不過，有時候你想要允許一個 `@extend` 不產生任何選擇符。要做到這一點，只需要在行末加上 `!optional` 旗標。
+例如：
 
     a.important {
       @extend .notice !optional;
     }
 
-#### `@extend` in Directives
+#### 用於指令中的 `@extend`
 
-There are some restrictions on the use of `@extend` within directives such as
-`@media`. Sass is unable to make CSS rules outside of the `@media` block apply
-to selectors inside it without creating a huge amount of stylesheet bloat by
-copying styles all over the place. This means that if you use `@extend` within
-`@media` (or other CSS directives), you may only extend selectors that appear
-within the same directive block.
+`@extend` 在 `@media` 等指令內使用時有一些限制。
+Sass 無法將 `@media` 區塊之外的 CSS 規則套用到它裡面的選擇符，因為這不可避免地會到處複製樣式，創造出大量膨脹的樣式表。
+這意味著，如果你在 `@media`（或是其他 CSS 指令）內使用 `@extend`，你只能繼承出現相同指令區塊的選擇符。
 
-For example, the following works fine:
+例如，以下範例會正常運作：
 
     @media print {
       .error {
@@ -1492,7 +1487,7 @@ For example, the following works fine:
       }
     }
 
-But this is an error:
+但是這樣會導致錯誤：
 
     .error {
       border: 1px #f00;
@@ -1507,8 +1502,7 @@ But this is an error:
       }
     }
 
-Someday we hope to have `@extend` supported natively in the browser, which will
-allow it to be used within `@media` and other directives.
+我們希望有朝一日 `@extend` 能獲得瀏覽器原生支援，這將允許它被用在 `@media` 及其它指令中。
 
 ### `@debug`
 
