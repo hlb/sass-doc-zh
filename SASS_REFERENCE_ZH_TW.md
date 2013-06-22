@@ -281,45 +281,19 @@ Sass 命令列工具會根據文件副檔名判斷你使用的語法，但有時
 
 ### 編碼
 
-When running on Ruby 1.9 and later, Sass is aware of the character encoding of documents.
-By default, Sass assumes that all stylesheets are encoded
-using whatever coding system your operating system defaults to.
-For many users this will be `UTF-8`, the de facto standard for the web.
-For some users, though, it may be a more local encoding.
+當 Sass 跑在 1.9 以上版本的 Ruby 時，Sass 會注意文件的字元編碼。預設情況下，Sass 假定所有的樣式表，使用與作業系統相同的編碼。對很多人來說是網路世界的標準編碼 `UTF-8`。然而對某些人來說，可能是更本土化的編碼。
 
-If you want to use a different encoding for your stylesheet
-than your operating system default,
-you can use the `@charset` declaration just like in CSS.
-Add `@charset "encoding-name";` at the beginning of the stylesheet
-(before any whitespace or comments)
-and Sass will interpret it as the given encoding.
-Note that whatever encoding you use, it must be convertible to Unicode.
+如果你想使用與作業系統不同的編碼，可以像在 CSS 裡那樣，使用 `@charset` 宣告。在樣式表最前面的地方加入 `@charset "encoding-name";` （在任何空白或註解之前），則 Sass 會用給定的編碼來解讀文件。注意，不管你用什麼編碼，必須是能夠轉換成萬國碼的編碼。
 
-Sass will also respect any Unicode BOMs and non-ASCII-compatible Unicode encodings
-[as specified by the CSS spec](http://www.w3.org/TR/CSS2/syndata.html#charset),
-although this is *not* the recommended way
-to specify the character set for a document.
-Note that Sass does not support the obscure `UTF-32-2143`,
-`UTF-32-3412`, `EBCDIC`, `IBM1026`, and `GSM 03.38` encodings,
-since Ruby does not have support for them
-and they're highly unlikely to ever be used in practice.
+雖然不建議這麼做，但 Sass 也接受任何 [CSS 標準所列出](http://www.w3.org/TR/CSS2/syndata.html#charset)的萬國碼 BOM 以及不相容 ASC-II 的萬國碼編碼。由於 Ruby 不支援 `UTF-32-2143`、`UTF-32-3412`、`EBCDIC`、`IBM1026` 以及 `GSM 03.38`，所以 Sass 不支援這些過時的編碼，而它們在現實當中，幾乎完全用不到。
 
-#### Output Encoding
+#### 輸出編碼
 
-In general, Sass will try to encode the output stylesheet
-using the same encoding as the input stylesheet.
-In order for it to do this, though, the input stylesheet must have a `@charset` declaration;
-otherwise, Sass will default to encoding the output stylesheet as UTF-8.
-In addition, it will add a `@charset` declaration to the output
-if it's not plain ASCII.
+普遍來說，Sass 會試著使用與輸入樣式表相同的編碼，作為輸出樣式表的編碼。為了要達成這件事，輸入樣式表必須要有 `@charset` 宣告；否則 Sass 預設會使用 `UTF-8` 來輸出樣式表。除此之外，它會給不是純 ASC-II 的樣式表加入 `@charset` 宣告。
 
-When other stylesheets with `@charset` declarations are `@import`ed,
-Sass will convert them to the same encoding as the main stylesheet.
+當其它有著 `@charset` 宣告的樣式表透過 `import` 進來時，Sass 會將它們轉換成與主樣式表相同的編碼。
 
-Note that Ruby 1.8 does not have good support for character encodings,
-and so Sass behaves somewhat differently when running under it than under Ruby 1.9 and later.
-In Ruby 1.8, Sass simply uses the first `@charset` declaration in the stylesheet
-or any of the other stylesheets it `@import`s.
+注意到 Ruby 1.8 對字元編碼的支持不太好，所以使用 Ruby 1.8 的 Sass ，與使用 1.9 版本之後的 Sass 行為會不大一樣。在 Ruby 1.8，Sass 單純地使用樣式表內第一個 `@charset` 宣告，或是任何其它 `@import` 進來的樣式表內含的 `@charset` 宣告。
 
 ## CSS 擴充版本
 
