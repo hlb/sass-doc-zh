@@ -2033,12 +2033,11 @@ Sass 預設使用巢狀方式匯出 CSS，因為這可反應了 CSS 樣式及所
 
 巢狀排列在觀看大型 CSS 檔案時相當有用：你不必認真閱讀程式，便可輕鬆理解整個檔案的結構。
 
-### `:expanded`
+### 延展 `:expanded`
 
-Expanded is a more typical human-made CSS style,
-with each property and rule taking up one line.
-Properties are indented within the rules,
-but the rules aren't indented in any special way.
+這是手寫 CSS 時常見的程式樣式，
+每個屬性與規則都各佔一行。
+規則中的屬性縮排呈現，但規則本身則不特別縮排。
 例如：
 
     #main {
@@ -2055,14 +2054,13 @@ but the rules aren't indented in any special way.
       text-decoration: underline;
     }
 
-### `:compact`
+### 緊湊 `:compact`
 
-Compact style takes up less space than Nested or Expanded.
-It also draws the focus more to the selectors than to their properties.
-Each CSS rule takes up only one line,
-with every property defined on that line.
-Nested rules are placed next to each other with no newline,
-while separate groups of rules have newlines between them.
+緊湊樣式比巢狀或延展樣式的所需空間更少，
+也讓選擇符比其屬性更為顯眼。
+每個 CSS 規則各佔一行，也就讓同規則內的所有屬性都放在這一行中。
+原本的巢狀規則將緊鄰放置，
+而與其他規則組以一行空白行區隔。
 例如：
 
     #main { color: #fff; background-color: #000; }
@@ -2070,27 +2068,26 @@ while separate groups of rules have newlines between them.
 
     .huge { font-size: 10em; font-weight: bold; text-decoration: underline; }
 
-### `:compressed`
+### 壓縮 `:compressed`
 
-Compressed style takes up the minimum amount of space possible,
-having no whitespace except that necessary to separate selectors
-and a newline at the end of the file.
-It also includes some other minor compressions,
-such as choosing the smallest representation for colors.
-It's not meant to be human-readable.
+壓縮樣式以最精簡、不佔空間的方式呈現。
+除了選擇符裡必要的空白外，不留任何空白，也只在所有規則的最後加上一個斷行。
+除此之外，樣式本身也將以其他方式微調以求取最小空間，
+例如以最精簡的方式表達顏色等等。
+這種匯出樣式不追求可讀性。
 例如：
 
     #main{color:#fff;background-color:#000}#main p{width:10em}.huge{font-size:10em;font-weight:bold;text-decoration:underline}
 
-## Extending Sass
+## 擴充 Sass
 
-Sass provides a number of advanced customizations for users with unique requirements.
-Using these features requires a strong understanding of Ruby.
+Sass 提供許多進一步自訂的方式，以求符合使用者的特殊需要。
+想使用這些自定功能，需先對 Ruby 有深入瞭解。
 
-### Defining Custom Sass Functions
+### 自訂 Sass 函式
 
-Users can define their own Sass functions using the Ruby API.
-For more information, see the [source documentation](Sass/Script/Functions.html#adding_custom_functions).
+使用者可以用 Ruby API 自訂 Sass 函式。
+這方面的資訊請查閱[source documentation](Sass/Script/Functions.html#adding_custom_functions).
 
 ### Cache Stores
 
