@@ -1480,11 +1480,7 @@ Sass 無法將 `@media` 區塊之外的 CSS 規則套用到它裡面的選擇符
 
 ### `@debug`
 
-The `@debug` directive prints the value of a SassScript expression
-to the standard error output stream.
-It's useful for debugging Sass files
-that have complicated SassScript going on.
-例如：
+`@debug` 指令將 SassScript 表達式的值，輸出至標準錯誤輸出串流。用來除錯有著複雜 SassScript 的 Sass 檔案時很有用。例如：
 
     @debug 10em + 12em;
 
@@ -1494,18 +1490,12 @@ that have complicated SassScript going on.
 
 ### `@warn`
 
-The `@warn` directive prints the value of a SassScript expression
-to the standard error output stream.
-It's useful for libraries that need to warn users of deprecations
-or recovering from minor mixin usage mistakes.
-There are two major distinctions between `@warn` and `@debug`:
+`@warn` 指令將 SassScript 表達式的值，輸出至標準錯誤輸出串流。這對函式庫來說很有用，可警告仍使用過時用法的使用者，或是糾正使用者所犯的 mixin 小錯誤。`@warn` 與 `@debug` 有兩個主要的差別：
 
-1. You can turn warnings off with the `--quiet` command-line option
-   or the `:quiet` Sass option.
-2. A stylesheet trace will be printed out along with the message
-   so that the user being warned can see where their styles caused the warning.
+1. 可以使用命令行選項 `--quiet` 或 `:quiet` 把警告關掉。
+2. 樣式表的追蹤過程會隨著訊息印出，使用者可知道哪些樣式造成了警告。
 
-Usage Example:
+用法示範：
 
     @mixin adjust-location($x, $y) {
       @if unitless($x) {
